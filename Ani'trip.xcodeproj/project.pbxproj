@@ -13,6 +13,9 @@
 		06BDA6CF287304A5003CFF2F /* Ani_tripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6CE287304A5003CFF2F /* Ani_tripTests.swift */; };
 		06BDA6D9287304A5003CFF2F /* Ani_tripUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6D8287304A5003CFF2F /* Ani_tripUITests.swift */; };
 		06BDA6DB287304A5003CFF2F /* Ani_tripUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6DA287304A5003CFF2F /* Ani_tripUITestsLaunchTests.swift */; };
+		06BDA6EC28730555003CFF2F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6EB28730555003CFF2F /* User.swift */; };
+		06BDA6EE287305DE003CFF2F /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6ED287305DE003CFF2F /* Address.swift */; };
+		06BDA6F02873068F003CFF2F /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6EF2873068F003CFF2F /* Trip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,9 @@
 		06BDA6D4287304A5003CFF2F /* Ani'tripUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ani'tripUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BDA6D8287304A5003CFF2F /* Ani_tripUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ani_tripUITests.swift; sourceTree = "<group>"; };
 		06BDA6DA287304A5003CFF2F /* Ani_tripUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ani_tripUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		06BDA6EB28730555003CFF2F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		06BDA6ED287305DE003CFF2F /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		06BDA6EF2873068F003CFF2F /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,9 @@
 		06BDA6E7287304AF003CFF2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06BDA6EB28730555003CFF2F /* User.swift */,
+				06BDA6ED287305DE003CFF2F /* Address.swift */,
+				06BDA6EF2873068F003CFF2F /* Trip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,6 +295,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06BDA6F02873068F003CFF2F /* Trip.swift in Sources */,
+				06BDA6EE287305DE003CFF2F /* Address.swift in Sources */,
+				06BDA6EC28730555003CFF2F /* User.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +456,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Ani'trip/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ani'trip/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 6MAUVS763K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -473,7 +485,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Ani'trip/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ani'trip/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 6MAUVS763K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
