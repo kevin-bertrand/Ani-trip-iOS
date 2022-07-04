@@ -17,6 +17,8 @@
 		06BDA6EE287305DE003CFF2F /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6ED287305DE003CFF2F /* Address.swift */; };
 		06BDA6F02873068F003CFF2F /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6EF2873068F003CFF2F /* Trip.swift */; };
 		06BDA6F228730761003CFF2F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F128730761003CFF2F /* LoginView.swift */; };
+		06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F428730C82003CFF2F /* TextFieldWithIcon.swift */; };
+		06BDA6F728731344003CFF2F /* ButtonWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		06BDA6ED287305DE003CFF2F /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		06BDA6EF2873068F003CFF2F /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		06BDA6F128730761003CFF2F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		06BDA6F428730C82003CFF2F /* TextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithIcon.swift; sourceTree = "<group>"; };
+		06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 		06BDA6E8287304B3003CFF2F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06BDA6F328730C34003CFF2F /* Components */,
 				06BDA6F128730761003CFF2F /* LoginView.swift */,
 			);
 			path = View;
@@ -166,6 +171,15 @@
 				06BDA6C3287304A5003CFF2F /* Preview Content */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06BDA6F328730C34003CFF2F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				06BDA6F428730C82003CFF2F /* TextFieldWithIcon.swift */,
+				06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,9 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				06BDA6F02873068F003CFF2F /* Trip.swift in Sources */,
+				06BDA6F728731344003CFF2F /* ButtonWithIcon.swift in Sources */,
 				06BDA6EE287305DE003CFF2F /* Address.swift in Sources */,
 				06BDA6EC28730555003CFF2F /* User.swift in Sources */,
 				06BDA6F228730761003CFF2F /* LoginView.swift in Sources */,
+				06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
