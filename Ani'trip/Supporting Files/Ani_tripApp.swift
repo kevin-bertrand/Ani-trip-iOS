@@ -11,7 +11,7 @@ import SwiftUI
 struct Ani_tripApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            
         }
     }
 }

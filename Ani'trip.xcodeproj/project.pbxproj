@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */; };
-		06BDA6C0287304A3003CFF2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6BF287304A3003CFF2F /* ContentView.swift */; };
 		06BDA6C2287304A5003CFF2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BDA6C1287304A5003CFF2F /* Assets.xcassets */; };
 		06BDA6C5287304A5003CFF2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BDA6C4287304A5003CFF2F /* Preview Assets.xcassets */; };
 		06BDA6CF287304A5003CFF2F /* Ani_tripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6CE287304A5003CFF2F /* Ani_tripTests.swift */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		06BDA6BA287304A3003CFF2F /* Ani'trip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ani'trip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ani_tripApp.swift; sourceTree = "<group>"; };
-		06BDA6BF287304A3003CFF2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		06BDA6C1287304A5003CFF2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06BDA6C4287304A5003CFF2F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		06BDA6CA287304A5003CFF2F /* Ani'tripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ani'tripTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,10 +92,10 @@
 		06BDA6BC287304A3003CFF2F /* Ani'trip */ = {
 			isa = PBXGroup;
 			children = (
-				06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */,
-				06BDA6BF287304A3003CFF2F /* ContentView.swift */,
-				06BDA6C1287304A5003CFF2F /* Assets.xcassets */,
-				06BDA6C3287304A5003CFF2F /* Preview Content */,
+				06BDA6EA287304BB003CFF2F /* Supporting Files */,
+				06BDA6E9287304B7003CFF2F /* Controller */,
+				06BDA6E8287304B3003CFF2F /* View */,
+				06BDA6E7287304AF003CFF2F /* Model */,
 			);
 			path = "Ani'trip";
 			sourceTree = "<group>";
@@ -125,6 +123,37 @@
 				06BDA6DA287304A5003CFF2F /* Ani_tripUITestsLaunchTests.swift */,
 			);
 			path = "Ani'tripUITests";
+			sourceTree = "<group>";
+		};
+		06BDA6E7287304AF003CFF2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		06BDA6E8287304B3003CFF2F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		06BDA6E9287304B7003CFF2F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		06BDA6EA287304BB003CFF2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */,
+				06BDA6C1287304A5003CFF2F /* Assets.xcassets */,
+				06BDA6C3287304A5003CFF2F /* Preview Content */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06BDA6C0287304A3003CFF2F /* ContentView.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
