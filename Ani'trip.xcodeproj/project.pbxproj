@@ -19,6 +19,15 @@
 		06BDA6F228730761003CFF2F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F128730761003CFF2F /* LoginView.swift */; };
 		06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F428730C82003CFF2F /* TextFieldWithIcon.swift */; };
 		06BDA6F728731344003CFF2F /* ButtonWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */; };
+		06BDA6F928732CF8003CFF2F /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6F828732CF8003CFF2F /* UserController.swift */; };
+		06BDA6FB28732F2F003CFF2F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6FA28732F2F003CFF2F /* UserManager.swift */; };
+		06BDA6FE2873329D003CFF2F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6FD2873329D003CFF2F /* Notification.swift */; };
+		06BDA70028733DDB003CFF2F /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6FF28733DDB003CFF2F /* SpinnerView.swift */; };
+		06BDA70228734162003CFF2F /* LoadingVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70128734162003CFF2F /* LoadingVIew.swift */; };
+		06BDA70528736A5E003CFF2F /* NewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70428736A5E003CFF2F /* NewAccountView.swift */; };
+		06BDA70728740D44003CFF2F /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70628740D44003CFF2F /* ForgetPasswordView.swift */; };
+		06BDA709287417C0003CFF2F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA708287417C0003CFF2F /* AppView.swift */; };
+		06BDA70C28741B58003CFF2F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70B28741B58003CFF2F /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +63,15 @@
 		06BDA6F128730761003CFF2F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		06BDA6F428730C82003CFF2F /* TextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithIcon.swift; sourceTree = "<group>"; };
 		06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIcon.swift; sourceTree = "<group>"; };
+		06BDA6F828732CF8003CFF2F /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		06BDA6FA28732F2F003CFF2F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		06BDA6FD2873329D003CFF2F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		06BDA6FF28733DDB003CFF2F /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		06BDA70128734162003CFF2F /* LoadingVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVIew.swift; sourceTree = "<group>"; };
+		06BDA70428736A5E003CFF2F /* NewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountView.swift; sourceTree = "<group>"; };
+		06BDA70628740D44003CFF2F /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
+		06BDA708287417C0003CFF2F /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		06BDA70B28741B58003CFF2F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +122,7 @@
 		06BDA6BC287304A3003CFF2F /* Ani'trip */ = {
 			isa = PBXGroup;
 			children = (
+				06BDA6FC28733293003CFF2F /* Extension */,
 				06BDA6EA287304BB003CFF2F /* Supporting Files */,
 				06BDA6E9287304B7003CFF2F /* Controller */,
 				06BDA6E8287304B3003CFF2F /* View */,
@@ -143,6 +162,7 @@
 				06BDA6EB28730555003CFF2F /* User.swift */,
 				06BDA6ED287305DE003CFF2F /* Address.swift */,
 				06BDA6EF2873068F003CFF2F /* Trip.swift */,
+				06BDA6FA28732F2F003CFF2F /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,8 +170,11 @@
 		06BDA6E8287304B3003CFF2F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06BDA70328736A45003CFF2F /* App */,
 				06BDA6F328730C34003CFF2F /* Components */,
 				06BDA6F128730761003CFF2F /* LoginView.swift */,
+				06BDA70428736A5E003CFF2F /* NewAccountView.swift */,
+				06BDA70628740D44003CFF2F /* ForgetPasswordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,6 +182,7 @@
 		06BDA6E9287304B7003CFF2F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				06BDA6F828732CF8003CFF2F /* UserController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -178,8 +202,35 @@
 			children = (
 				06BDA6F428730C82003CFF2F /* TextFieldWithIcon.swift */,
 				06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */,
+				06BDA6FF28733DDB003CFF2F /* SpinnerView.swift */,
+				06BDA70128734162003CFF2F /* LoadingVIew.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		06BDA6FC28733293003CFF2F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				06BDA6FD2873329D003CFF2F /* Notification.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		06BDA70328736A45003CFF2F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				06BDA70A28741B4E003CFF2F /* Tabs */,
+				06BDA708287417C0003CFF2F /* AppView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		06BDA70A28741B4E003CFF2F /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				06BDA70B28741B58003CFF2F /* SettingsView.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,12 +363,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06BDA6FB28732F2F003CFF2F /* UserManager.swift in Sources */,
 				06BDA6F02873068F003CFF2F /* Trip.swift in Sources */,
+				06BDA70528736A5E003CFF2F /* NewAccountView.swift in Sources */,
 				06BDA6F728731344003CFF2F /* ButtonWithIcon.swift in Sources */,
+				06BDA6F928732CF8003CFF2F /* UserController.swift in Sources */,
 				06BDA6EE287305DE003CFF2F /* Address.swift in Sources */,
+				06BDA70228734162003CFF2F /* LoadingVIew.swift in Sources */,
 				06BDA6EC28730555003CFF2F /* User.swift in Sources */,
+				06BDA709287417C0003CFF2F /* AppView.swift in Sources */,
+				06BDA70C28741B58003CFF2F /* SettingsView.swift in Sources */,
+				06BDA6FE2873329D003CFF2F /* Notification.swift in Sources */,
 				06BDA6F228730761003CFF2F /* LoginView.swift in Sources */,
+				06BDA70728740D44003CFF2F /* ForgetPasswordView.swift in Sources */,
 				06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */,
+				06BDA70028733DDB003CFF2F /* SpinnerView.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,6 +545,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,6 +575,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

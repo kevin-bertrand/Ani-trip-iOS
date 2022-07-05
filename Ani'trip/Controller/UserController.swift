@@ -1,0 +1,170 @@
+//
+//  UserController.swift
+//  Ani'trip
+//
+//  Created by Kevin Bertrand on 04/07/2022.
+//
+
+import Foundation
+
+final class UserController: ObservableObject {
+    // MARK: Public
+    // MARK: Properties
+    // General
+    @Published var showLoadingInProgressView: Bool = false
+    @Published var isLoggedIn: Bool = false
+    @Published var errorMessage: String = ""
+    
+    // Login view
+    @Published var loginEmail: String = ""
+    @Published var loginPassword: String = ""
+    @Published var rememberEmail: Bool = false
+    
+    // New user view
+    @Published var showNewAccountAlert: Bool = false
+    @Published var showNewAccountView: Bool = false
+    @Published var newEmail: String = ""
+    @Published var newPassword: String = ""
+    @Published var newPasswordVerification: String = ""
+    
+    // Forget password view
+    @Published var showForgetPasswordView: Bool = false
+    @Published var showForgetPasswordAlert: Bool = false
+    @Published var forgetPasswordEmail: String = ""
+    
+    // MARK: Methods
+    /// Login user
+    func login() {
+        showLoadingInProgressView = true
+        
+        guard !loginPassword.isEmpty,
+              !loginEmail.isEmpty else {
+            errorMessage = "An email and a password are needed!"
+            showLoadingInProgressView = false
+            return
+        }
+        
+        guard isValidEmailAddress(loginEmail) else {
+            errorMessage = "A valid email address is required!"
+            showLoadingInProgressView = false
+            return
+        }
+        
+        userManager.login(user: UserToConnect(email: loginEmail, password: loginPassword))
+    }
+    
+    /// Perform the creation of the new account
+    func createNewAccount() {
+        showLoadingInProgressView = true
+        
+        guard !newPassword.isEmpty, !newPasswordVerification.isEmpty, !newEmail.isEmpty else {
+            showLoadingInProgressView = false
+            errorMessage = "An email and a password are needed!"
+            return
+        }
+        
+        guard isValidEmailAddress(newEmail) else {
+            showLoadingInProgressView = false
+            errorMessage = "A valid email address is required!"
+            return
+        }
+        
+        guard newPassword == newPasswordVerification else {
+            showLoadingInProgressView = false
+            errorMessage = "Both password are not equals!"
+            return
+        }
+        
+        userManager.createAccount(for: UserToConnect(email: newEmail, password: newPassword))
+    }
+    
+    /// End the request of the creation of a new account
+    func finishUserCreation() {
+        showNewAccountView = false
+        errorMessage = ""
+        newEmail = ""
+        newPassword = ""
+        newPasswordVerification = ""
+    }
+    
+    /// Perform the request to send a new password
+    func forgetPassword() {
+        showLoadingInProgressView = true
+        
+        guard !forgetPasswordEmail.isEmpty,
+              isValidEmailAddress(forgetPasswordEmail) else {
+            showLoadingInProgressView = false
+            errorMessage = "A valid email address is needed!"
+            return
+        }
+        
+        userManager.forgetPassword(for: UserToConnect(email: forgetPasswordEmail, password: ""))
+    }
+    
+    /// End the request of a new password
+    func finishForgetPasswordRequest() {
+        showForgetPasswordView = false
+        errorMessage = ""
+        forgetPasswordEmail = ""
+    }
+    
+    /// Disconnect the user
+    func disconnect() {
+        objectWillChange.send()
+        isLoggedIn = false
+    }
+    
+    // MARK: Init
+    init() {
+        configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
+        configureNotification(for: Notification.AniTrip.loginFailled.notificationName)
+        configureNotification(for: Notification.AniTrip.successfullCreation.notificationName)
+        configureNotification(for: Notification.AniTrip.errorDuringCreation.notificationName)
+        configureNotification(for: Notification.AniTrip.successRequestForNewPassword.notificationName)
+        configureNotification(for: Notification.AniTrip.errorDuringRequestForNewPassword.notificationName)
+    }
+    
+    // MARK: Private
+    // MARK: Properties
+    private let userManager: UserManager = UserManager()
+    
+    // MARK: Methods
+    /// Check if the entered email is correct
+    private func isValidEmailAddress(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)        
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    /// Initialise all notification for this controller
+    @objc private func processNotification(_ notification: Notification) {
+        if let notificationName = notification.userInfo?["name"] as? Notification.Name {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+                self.showLoadingInProgressView = false
+                
+                switch notificationName {
+                case Notification.AniTrip.loginFailled.notificationName:
+                    self.errorMessage = Notification.AniTrip.loginFailled.notificationMessage
+                case Notification.AniTrip.loginSuccess.notificationName:
+                    self.loginPassword = ""
+                    self.isLoggedIn = true
+                case Notification.AniTrip.successfullCreation.notificationName:
+                    self.showNewAccountAlert = true
+                case Notification.AniTrip.errorDuringCreation.notificationName:
+                    self.errorMessage = Notification.AniTrip.errorDuringCreation.notificationMessage
+                case Notification.AniTrip.successRequestForNewPassword.notificationName:
+                    self.showForgetPasswordAlert = true
+                case Notification.AniTrip.errorDuringRequestForNewPassword.notificationName:
+                    self.errorMessage = Notification.AniTrip.errorDuringRequestForNewPassword.notificationMessage
+                default: break
+                }
+            }
+        }
+    }
+    
+    /// Configure notification
+    private func configureNotification(for name: Notification.Name) {
+        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: name, object: nil)
+    }
+}

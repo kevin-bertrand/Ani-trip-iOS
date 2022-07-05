@@ -8,29 +8,27 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var rememberEmail: Bool = false
-    
+    @EnvironmentObject var userController: UserController
+
     var body: some View {
         VStack {
             Image("Logo")
                 .resizable()
                 .frame(width: 150, height: 150)
                 .padding(.vertical)
-            
+
             Spacer()
             
-            TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $email)
+            TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.loginEmail)
             
             HStack {
                 Spacer()
                 Text("Save email")
                     .foregroundColor(Color.gray)
                 Button {
-                    rememberEmail.toggle()
+                    userController.rememberEmail.toggle()
                 } label: {
-                    if rememberEmail {
+                    if userController.rememberEmail {
                         Image(systemName: "checkmark.square")
                     } else {
                         Image(systemName: "square")
@@ -38,38 +36,52 @@ struct LoginView: View {
                 }
             }.padding(.bottom)
             
-            TextFieldWithIcon(icon: "lock", placeholder: "Password", isSecure: true, text: $password)
+            TextFieldWithIcon(icon: "lock", placeholder: "Password", isSecure: true, text: $userController.loginPassword)
             
             HStack {
                 Spacer()
                 Button {
-                    // TODO: Show forget password sheet
+                    userController.showForgetPasswordView = true
                 } label: {
                     Text("Forget password?")
                 }
-            }
+            }.padding(.bottom)
+            
+            Text(userController.errorMessage)
+                .bold()
+                .foregroundColor(.red)
             
             Spacer()
             
             ButtonWithIcon(action: {
-                // TODO: Perform login
+                userController.login()
             }, title: "LOGIN")
             .padding(.vertical)
             
             HStack {
                 Text("No account?")
                 Button {
-                    // TODO: Show new account page
+                    userController.showNewAccountView = true
                 } label: {
                     Text("Ask one")
                 }
             }.font(.callout)
         }.padding()
+            .fullScreenCover(isPresented: $userController.showLoadingInProgressView) {
+                LoadingVIew(textToDisplay: "Loggin in progres... Please wait!")
+            }
+            .sheet(isPresented: $userController.showNewAccountView) {
+                NewAccountView()
+            }
+            .sheet(isPresented: $userController.showForgetPasswordView) {
+                ForgetPasswordView()
+            }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(UserController())
     }
 }

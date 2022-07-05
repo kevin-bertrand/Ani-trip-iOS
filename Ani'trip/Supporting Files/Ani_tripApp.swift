@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct Ani_tripApp: App {
+    @StateObject private var userController: UserController = UserController()
+    
     var body: some Scene {
         WindowGroup {
-            
+            if userController.isLoggedIn {
+                AppView()
+                    .environmentObject(userController)
+            } else {
+                LoginView()
+                    .environmentObject(userController)
+            }
         }
     }
 }

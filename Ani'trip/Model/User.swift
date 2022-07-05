@@ -20,6 +20,11 @@ struct User: Codable {
     let address: Address
 }
 
+struct UserToConnect {
+    var email: String
+    var password: String
+}
+
 enum Gender: Codable {
     case man
     case woman
