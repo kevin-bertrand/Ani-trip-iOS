@@ -10,16 +10,23 @@ import SwiftUI
 @main
 struct Ani_tripApp: App {
     @StateObject private var userController: UserController = UserController()
+    @StateObject private var mapController: MapController = MapController()
     
     var body: some Scene {
         WindowGroup {
-            if userController.isLoggedIn {
-                AppView()
-                    .environmentObject(userController)
-            } else {
-                LoginView()
-                    .environmentObject(userController)
+            Group {
+                if userController.isLoggedIn {
+                    AppView()
+                        .environmentObject(mapController)
+                } else {
+                    LoginView()
+                }
             }
+            .environmentObject(userController)
+            .fullScreenCover(isPresented: $userController.showLoadingInProgressView) {
+                LoadingVIew(textToDisplay: "Loading in progres... Please wait!")
+            }
+            
         }
     }
 }

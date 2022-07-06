@@ -14,7 +14,11 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section {
-                    Text("User")
+                    NavigationLink {
+                        UserProfilView()
+                    } label: {
+                        UserCellView()
+                    }
                 }
                 
                 Section(header: Text("App settings")) {
@@ -37,7 +41,7 @@ struct SettingsView: View {
                     }
 
                 }
-            }
+            }.navigationTitle(Text("⚙️ Settings"))
         }
     }
 }

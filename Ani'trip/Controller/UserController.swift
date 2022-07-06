@@ -5,7 +5,9 @@
 //  Created by Kevin Bertrand on 04/07/2022.
 //
 
+import CoreLocation
 import Foundation
+import MapKit
 
 final class UserController: ObservableObject {
     // MARK: Public
@@ -14,6 +16,7 @@ final class UserController: ObservableObject {
     @Published var showLoadingInProgressView: Bool = false
     @Published var isLoggedIn: Bool = false
     @Published var errorMessage: String = ""
+    var connectedUser: User? { userManager.user }
     
     // Login view
     @Published var loginEmail: String = ""
@@ -31,6 +34,15 @@ final class UserController: ObservableObject {
     @Published var showForgetPasswordView: Bool = false
     @Published var showForgetPasswordAlert: Bool = false
     @Published var forgetPasswordEmail: String = ""
+    
+    // Update user informations
+    @Published var showUpdateUserAlert: Bool = false
+    @Published var userToUpdate: UpdateUser = UpdateUser(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), password: "", passwordVerification: "")
+    var updatePasswordError: String = ""
+    
+    // User profil
+    @Published var userCoordinate: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+    var userPin: [Places] = []
     
     // MARK: Methods
     /// Login user
@@ -114,6 +126,21 @@ final class UserController: ObservableObject {
         isLoggedIn = false
     }
     
+    /// Update user
+    func update() {
+        showLoadingInProgressView = true
+        
+        if (!userToUpdate.password.isEmpty == true) == !userToUpdate.passwordVerification.isEmpty {
+            guard userToUpdate.password == userToUpdate.passwordVerification else {
+                updatePasswordError = "Both password must match!"
+                showLoadingInProgressView = false
+                return
+            }
+        }
+        
+        userManager.update(user: userToUpdate)
+    }
+    
     // MARK: Init
     init() {
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
@@ -122,17 +149,20 @@ final class UserController: ObservableObject {
         configureNotification(for: Notification.AniTrip.errorDuringCreation.notificationName)
         configureNotification(for: Notification.AniTrip.successRequestForNewPassword.notificationName)
         configureNotification(for: Notification.AniTrip.errorDuringRequestForNewPassword.notificationName)
+        configureNotification(for: Notification.AniTrip.successUserUpdate.notificationName)
+        configureNotification(for: Notification.AniTrip.errorDuringUpdatingUser.notificationName)
     }
     
     // MARK: Private
     // MARK: Properties
     private let userManager: UserManager = UserManager()
+    private let mapController: MapController = MapController()
     
     // MARK: Methods
     /// Check if the entered email is correct
     private func isValidEmailAddress(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)        
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)
     }
     
@@ -147,8 +177,7 @@ final class UserController: ObservableObject {
                 case Notification.AniTrip.loginFailled.notificationName:
                     self.errorMessage = Notification.AniTrip.loginFailled.notificationMessage
                 case Notification.AniTrip.loginSuccess.notificationName:
-                    self.loginPassword = ""
-                    self.isLoggedIn = true
+                    self.loginSuccess()
                 case Notification.AniTrip.successfullCreation.notificationName:
                     self.showNewAccountAlert = true
                 case Notification.AniTrip.errorDuringCreation.notificationName:
@@ -157,6 +186,10 @@ final class UserController: ObservableObject {
                     self.showForgetPasswordAlert = true
                 case Notification.AniTrip.errorDuringRequestForNewPassword.notificationName:
                     self.errorMessage = Notification.AniTrip.errorDuringRequestForNewPassword.notificationMessage
+                case Notification.AniTrip.successUserUpdate.notificationName:
+                    self.showUpdateUserAlert = true
+                case Notification.AniTrip.errorDuringUpdatingUser.notificationName:
+                    print("ok")
                 default: break
                 }
             }
@@ -166,5 +199,20 @@ final class UserController: ObservableObject {
     /// Configure notification
     private func configureNotification(for name: Notification.Name) {
         NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: name, object: nil)
+    }
+    
+    /// Perform action when the login is a success
+    private func loginSuccess() {
+        loginPassword = ""
+        isLoggedIn = true
+        if let user = connectedUser {
+            userToUpdate = UpdateUser(id: user.id, firstname: user.firstname, lastname: user.lastname, email: user.email, phoneNumber: user.phoneNumber, gender: user.gender, position: user.position, missions: user.missions, isActive: user.isActive, address: user.address, password: "", passwordVerification: "")
+            mapController.getAddressFromString(user.address) { location in
+                if let location = location {
+                    self.userCoordinate = MKCoordinateRegion(center: location, latitudinalMeters: 750, longitudinalMeters: 750)
+                    self.userPin = [Places(lat: location.latitude, lon: location.longitude)]
+                }
+            }
+        }
     }
 }

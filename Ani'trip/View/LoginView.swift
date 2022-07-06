@@ -67,9 +67,6 @@ struct LoginView: View {
                 }
             }.font(.callout)
         }.padding()
-            .fullScreenCover(isPresented: $userController.showLoadingInProgressView) {
-                LoadingVIew(textToDisplay: "Loggin in progres... Please wait!")
-            }
             .sheet(isPresented: $userController.showNewAccountView) {
                 NewAccountView()
             }

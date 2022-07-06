@@ -8,11 +8,11 @@
 import Foundation
 
 struct Address: Codable {
-    let roadName: String
-    let roadType: String
-    let streetNumber: String
-    let complement: String?
-    let zipCode: String
-    let city: String
-    let country: String
+    var roadName: String
+    var roadType: String
+    var streetNumber: String
+    var complement: String?
+    var zipCode: String
+    var city: String
+    var country: String
 }

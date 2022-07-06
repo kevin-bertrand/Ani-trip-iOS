@@ -10,6 +10,7 @@ import Foundation
 final class UserManager {
     // MARK: Public
     // MARK: Properties
+    var user: User? { connecteUser }
     
     // MARK: Methods
     /// Perform the login of the user
@@ -30,8 +31,20 @@ final class UserManager {
         sendNotification(.successRequestForNewPassword)
     }
     
+    /// Disconnect the user
+    func disconnect() {
+        connecteUser = nil
+    }
+    
+    /// Update the user informations
+    func update(user: UpdateUser) {
+        // TODO: Process api call
+        sendNotification(.successUserUpdate)
+    }
+    
     // MARK: Private
     // MARK: Properties
+    private var connecteUser: User?
     
     // MARK: Methods
     /// Send Notification

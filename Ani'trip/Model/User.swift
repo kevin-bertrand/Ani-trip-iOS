@@ -20,6 +20,21 @@ struct User: Codable {
     let address: Address
 }
 
+struct UpdateUser: Codable {
+    let id: UUID
+    var firstname: String
+    var lastname: String
+    var email: String
+    var phoneNumber: String
+    var gender: Gender
+    var position: Position
+    var missions: [String]
+    var isActive: Bool
+    var address: Address
+    var password: String
+    var passwordVerification: String
+}
+
 struct UserToConnect {
     var email: String
     var password: String
@@ -31,7 +46,9 @@ enum Gender: Codable {
     case notDeterminded
 }
 
-enum Position: Codable {
-    case admin
-    case user
+enum Position: String, Codable, CaseIterable {
+    case admin = "Administrator"
+    case user = "User"
+    
+    var name: String { rawValue }
 }

@@ -16,6 +16,8 @@ extension Notification {
         case errorDuringCreation = "An error occurs during the creation of your profil. Please try later!"
         case successRequestForNewPassword = "An email was sent with the instruction to create a new password."
         case errorDuringRequestForNewPassword = "An error occurs during the process. Please try later!"
+        case successUserUpdate = "The user update is a success!"
+        case errorDuringUpdatingUser = "An error occrus during the process. Please try later!"
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
