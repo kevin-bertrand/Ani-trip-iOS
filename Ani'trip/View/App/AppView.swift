@@ -20,10 +20,11 @@ struct AppView: View {
                     Label("My trips", systemImage: "map.fill")
                 }
             
-            Text("Volunteers")
-                .tabItem {
-                    Label("Volunteers", systemImage: "person.3.fill")
-                }
+            NavigationView {
+                VolunteersView()
+            }.tabItem {
+                Label("Volunteers", systemImage: "person.3.fill")
+            }
             
             SettingsView()
                 .tabItem {

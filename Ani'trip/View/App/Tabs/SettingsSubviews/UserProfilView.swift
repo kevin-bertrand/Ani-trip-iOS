@@ -15,59 +15,8 @@ struct UserProfilView: View {
     
     var body: some View {
         VStack {
-            Form {
-                if let user = userController.connectedUser {
-                    Section {
-                        HStack {
-                            Spacer()
-                            
-                            VStack {
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                                    .frame(width: 100, height: 100)
-                                Text("\(user.firstname) \(user.lastname)")
-                                    .font(.title2)
-                                    .bold()
-                                    .padding(.top)
-                            }
-                            
-                            Spacer()
-                        }
-                    }.listRowBackground(EmptyView())
-                    
-                    Section(header: Text("Address")) {
-                        HStack {
-                            Map(coordinateRegion: $userController.userCoordinate, interactionModes: .zoom, annotationItems: userController.userPin) { location in
-                                MapMarker(coordinate: location.location, tint: .accentColor)
-                            }.frame(width: 100, height: 100)
-                            VStack(alignment: .leading) {
-                                Text("\(user.address.streetNumber), \(user.address.roadType) \(user.address.roadName)")
-                                Text("\(user.address.zipCode), \(user.address.city)")
-                                Text("\(user.address.country)")
-                            }
-                            .bold()
-                        }
-                    }
-                    
-                    Section(header: Text("Contact informations")) {
-                        HStack {
-                            Text("Email")
-                            Spacer()
-                            Text(user.email)
-                                .foregroundColor(.gray)
-                        }
-                        HStack {
-                            Text("Phone")
-                            Spacer()
-                            Text(user.phoneNumber)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    
-                    Section(header: Text("Missions")) {
-                        Text(user.missions.joined(separator: ", "))
-                    }
-                }
+            if let user = userController.connectedUser {
+                ProfilView(user: user)
             }
         }
         .toolbar {

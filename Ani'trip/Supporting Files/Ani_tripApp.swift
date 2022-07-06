@@ -11,16 +11,18 @@ import SwiftUI
 struct Ani_tripApp: App {
     @StateObject private var userController: UserController = UserController()
     @StateObject private var mapController: MapController = MapController()
+    @StateObject private var volunteerController: VolunteerController = VolunteerController()
     
     var body: some Scene {
         WindowGroup {
             Group {
-                if userController.isLoggedIn {
+//                if userController.isLoggedIn {
                     AppView()
                         .environmentObject(mapController)
-                } else {
-                    LoginView()
-                }
+                        .environmentObject(volunteerController)
+//                } else {
+//                    LoginView()
+//                }
             }
             .environmentObject(userController)
             .fullScreenCover(isPresented: $userController.showLoadingInProgressView) {

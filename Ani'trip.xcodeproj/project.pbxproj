@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0664F3AC28742C6400F7EA1B /* UserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AB28742C6400F7EA1B /* UserProfilView.swift */; };
 		0664F3AE2874303200F7EA1B /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AD2874303200F7EA1B /* MapController.swift */; };
 		0664F3B0287436C200F7EA1B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AF287436C200F7EA1B /* Places.swift */; };
 		0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */; };
 		0664F3B42874482200F7EA1B /* EditUserInfoTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B32874482200F7EA1B /* EditUserInfoTileView.swift */; };
+		0664F3B62875865700F7EA1B /* VolunteersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B52875865700F7EA1B /* VolunteersView.swift */; };
+		0664F3B8287586B000F7EA1B /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B7287586B000F7EA1B /* Volunteer.swift */; };
+		0664F3BA287586C000F7EA1B /* VolunteerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B9287586C000F7EA1B /* VolunteerManager.swift */; };
+		0664F3BC287586FC00F7EA1B /* VolunteerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3BB287586FC00F7EA1B /* VolunteerController.swift */; };
+		0664F3C0287594C700F7EA1B /* UserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3BF287594C700F7EA1B /* UserProfilView.swift */; };
+		0664F3C2287594EE00F7EA1B /* ProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C1287594EE00F7EA1B /* ProfilView.swift */; };
 		06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */; };
 		06BDA6C2287304A5003CFF2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BDA6C1287304A5003CFF2F /* Assets.xcassets */; };
 		06BDA6C5287304A5003CFF2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BDA6C4287304A5003CFF2F /* Preview Assets.xcassets */; };
@@ -54,11 +59,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0664F3AB28742C6400F7EA1B /* UserProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilView.swift; sourceTree = "<group>"; };
 		0664F3AD2874303200F7EA1B /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		0664F3AF287436C200F7EA1B /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserProfilView.swift; sourceTree = "<group>"; };
 		0664F3B32874482200F7EA1B /* EditUserInfoTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoTileView.swift; sourceTree = "<group>"; };
+		0664F3B52875865700F7EA1B /* VolunteersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersView.swift; sourceTree = "<group>"; };
+		0664F3B7287586B000F7EA1B /* Volunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
+		0664F3B9287586C000F7EA1B /* VolunteerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerManager.swift; sourceTree = "<group>"; };
+		0664F3BB287586FC00F7EA1B /* VolunteerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerController.swift; sourceTree = "<group>"; };
+		0664F3BF287594C700F7EA1B /* UserProfilView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilView.swift; sourceTree = "<group>"; };
+		0664F3C1287594EE00F7EA1B /* ProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilView.swift; sourceTree = "<group>"; };
 		06BDA6BA287304A3003CFF2F /* Ani'trip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ani'trip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ani_tripApp.swift; sourceTree = "<group>"; };
 		06BDA6C1287304A5003CFF2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,7 +124,7 @@
 		0664F3AA28742C5000F7EA1B /* SettingsSubviews */ = {
 			isa = PBXGroup;
 			children = (
-				0664F3AB28742C6400F7EA1B /* UserProfilView.swift */,
+				0664F3BF287594C700F7EA1B /* UserProfilView.swift */,
 				0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */,
 			);
 			path = SettingsSubviews;
@@ -185,6 +195,8 @@
 				06BDA6EF2873068F003CFF2F /* Trip.swift */,
 				06BDA6FA28732F2F003CFF2F /* UserManager.swift */,
 				0664F3AF287436C200F7EA1B /* Places.swift */,
+				0664F3B7287586B000F7EA1B /* Volunteer.swift */,
+				0664F3B9287586C000F7EA1B /* VolunteerManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,6 +218,7 @@
 			children = (
 				06BDA6F828732CF8003CFF2F /* UserController.swift */,
 				0664F3AD2874303200F7EA1B /* MapController.swift */,
+				0664F3BB287586FC00F7EA1B /* VolunteerController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -227,6 +240,7 @@
 				06BDA6F628731344003CFF2F /* ButtonWithIcon.swift */,
 				06BDA6FF28733DDB003CFF2F /* SpinnerView.swift */,
 				06BDA70128734162003CFF2F /* LoadingVIew.swift */,
+				0664F3C1287594EE00F7EA1B /* ProfilView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -254,6 +268,7 @@
 				0664F3AA28742C5000F7EA1B /* SettingsSubviews */,
 				06BDA70D28741F92003CFF2F /* SettingsComponents */,
 				06BDA70B28741B58003CFF2F /* SettingsView.swift */,
+				0664F3B52875865700F7EA1B /* VolunteersView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -409,16 +424,21 @@
 				0664F3B42874482200F7EA1B /* EditUserInfoTileView.swift in Sources */,
 				06BDA709287417C0003CFF2F /* AppView.swift in Sources */,
 				06BDA70C28741B58003CFF2F /* SettingsView.swift in Sources */,
+				0664F3BA287586C000F7EA1B /* VolunteerManager.swift in Sources */,
 				06BDA6FE2873329D003CFF2F /* Notification.swift in Sources */,
+				0664F3C2287594EE00F7EA1B /* ProfilView.swift in Sources */,
+				0664F3BC287586FC00F7EA1B /* VolunteerController.swift in Sources */,
 				06BDA6F228730761003CFF2F /* LoginView.swift in Sources */,
+				0664F3B8287586B000F7EA1B /* Volunteer.swift in Sources */,
 				0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */,
 				06BDA70F28742061003CFF2F /* UserCellView.swift in Sources */,
+				0664F3B62875865700F7EA1B /* VolunteersView.swift in Sources */,
 				06BDA70728740D44003CFF2F /* ForgetPasswordView.swift in Sources */,
 				0664F3B0287436C200F7EA1B /* Places.swift in Sources */,
 				06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */,
+				0664F3C0287594C700F7EA1B /* UserProfilView.swift in Sources */,
 				06BDA70028733DDB003CFF2F /* SpinnerView.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
-				0664F3AC28742C6400F7EA1B /* UserProfilView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,10 @@ extension Notification {
         case successUserUpdate = "The user update is a success!"
         case errorDuringUpdatingUser = "An error occrus during the process. Please try later!"
         
+        // Volunteers
+        case successGettingVolunteerList = "The list of volunteers is downloaded"
+        case errorGettingVolunteerList = "An error occurs during the downloading..."
+        
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }
