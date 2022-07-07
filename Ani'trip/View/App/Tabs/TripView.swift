@@ -16,18 +16,7 @@ struct TripView: View {
                 NavigationLink {
                     DetailedTripView(trip: trip)
                 } label: {
-                    HStack {
-                        Image("TripIcon")
-                            .resizable()
-                            .frame(width: 50, height: 80)
-                        VStack(alignment: .leading) {
-                            Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)")
-                                .bold()
-                                .font(.title2)
-                            Text(trip.startDate.formatted(date: .numeric, time: .shortened))
-                            Text("\(trip.totalDistance) km")
-                        }
-                    }
+                    TripTileView(trip: trip)
                 }
             }
         }

@@ -25,6 +25,11 @@ final class TripController: ObservableObject {
     @Published var showSuccessAddingTripAlert: Bool = false
     @Published var newTrip: AddTrip = AddTrip(startDate: .now, endDate: .now, missions: [], comment: "", totalDistance: "0", startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""))
     
+    // Home View
+    var numberOfTripThisWeek: Int = 0
+    var distanceThisWeek: Double = 0.0
+    @Published var threeLatestTrips: [Trip] = []
+    
     // MARK: Methods
     /// Downloading trip list
     func getTripList() {
@@ -55,12 +60,19 @@ final class TripController: ObservableObject {
         tripManager.addNewTrip(newTrip)
     }
     
+    /// Getting informations at home on appear
+    func homeAppears() {
+        
+    }
+    
     // MARK: Init
     init() {
         configureNotification(for: Notification.AniTrip.successGettingTripList.notificationName)
         configureNotification(for: Notification.AniTrip.errorGettingTripList.notificationName)
         configureNotification(for: Notification.AniTrip.successAddingTrip.notificationName)
         configureNotification(for: Notification.AniTrip.errorAddingTrip.notificationName)
+        configureNotification(for: Notification.AniTrip.successDownloadedHomeInformations.notificationName)
+        configureNotification(for: Notification.AniTrip.errorDownloadedHomeInformations.notificationName)
     }
     
     // MARK: Private
@@ -84,6 +96,10 @@ final class TripController: ObservableObject {
                     self.showSuccessAddingTripAlert = true
                 case Notification.AniTrip.errorAddingTrip.notificationName:
                     print("error")
+                case Notification.AniTrip.successDownloadedHomeInformations.notificationName:
+                    self.homeInformationDownloaded()
+                case Notification.AniTrip.errorDownloadedHomeInformations.notificationName:
+                    print("error")
                 default: break
                 }
             }
@@ -99,5 +115,13 @@ final class TripController: ObservableObject {
     private func resetMapPin() {
         startAddress = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
         endAddress = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+    }
+    
+    /// End download home information
+    private func homeInformationDownloaded() {
+        objectWillChange.send()
+        numberOfTripThisWeek = tripManager.numberOfTripThisWeek
+        distanceThisWeek = tripManager.distanceThisWeek
+        threeLatestTrips = tripManager.threeLatestTrips
     }
 }

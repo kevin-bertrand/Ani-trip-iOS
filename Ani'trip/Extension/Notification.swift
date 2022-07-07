@@ -28,6 +28,8 @@ extension Notification {
         case errorGettingTripList = "An error occurs during the downloading of the trip list..."
         case successAddingTrip = "The new trip is added"
         case errorAddingTrip = "The new trip cannot be added!"
+        case successDownloadedHomeInformations = "Home informations successfully downloaded!"
+        case errorDownloadedHomeInformations = "Error during downloaded home informations!"
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")

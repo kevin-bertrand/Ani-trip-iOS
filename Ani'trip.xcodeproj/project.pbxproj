@@ -46,6 +46,8 @@
 		06BDA70C28741B58003CFF2F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70B28741B58003CFF2F /* SettingsView.swift */; };
 		06BDA70F28742061003CFF2F /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70E28742061003CFF2F /* UserCellView.swift */; };
 		06F173792876BC0700F4A8C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F173782876BC0700F4A8C1 /* HomeView.swift */; };
+		06F1737C2876BD9A00F4A8C1 /* NewsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F1737B2876BD9A00F4A8C1 /* NewsTileView.swift */; };
+		06F1737E2876C44500F4A8C1 /* TripTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F1737D2876C44500F4A8C1 /* TripTileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		06BDA70B28741B58003CFF2F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		06BDA70E28742061003CFF2F /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
 		06F173782876BC0700F4A8C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		06F1737B2876BD9A00F4A8C1 /* NewsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTileView.swift; sourceTree = "<group>"; };
+		06F1737D2876C44500F4A8C1 /* TripTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 			children = (
 				0664F3CA2875B76300F7EA1B /* DetailedTripView.swift */,
 				0664F3CE2875C64600F7EA1B /* AddTripView.swift */,
+				06F1737D2876C44500F4A8C1 /* TripTileView.swift */,
 			);
 			path = TripSubviews;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 		06BDA70A28741B4E003CFF2F /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				06F1737A2876BD8400F4A8C1 /* HomeSubview */,
 				0664F3C92875B74E00F7EA1B /* TripSubviews */,
 				0664F3AA28742C5000F7EA1B /* SettingsSubviews */,
 				06BDA70D28741F92003CFF2F /* SettingsComponents */,
@@ -309,6 +315,14 @@
 				0664F3B32874482200F7EA1B /* EditUserInfoTileView.swift */,
 			);
 			path = SettingsComponents;
+			sourceTree = "<group>";
+		};
+		06F1737A2876BD8400F4A8C1 /* HomeSubview */ = {
+			isa = PBXGroup;
+			children = (
+				06F1737B2876BD9A00F4A8C1 /* NewsTileView.swift */,
+			);
+			path = HomeSubview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,6 +464,7 @@
 				06BDA6F928732CF8003CFF2F /* UserController.swift in Sources */,
 				06BDA6EE287305DE003CFF2F /* Address.swift in Sources */,
 				06BDA70228734162003CFF2F /* LoadingVIew.swift in Sources */,
+				06F1737E2876C44500F4A8C1 /* TripTileView.swift in Sources */,
 				06BDA6EC28730555003CFF2F /* User.swift in Sources */,
 				0664F3C62875A85400F7EA1B /* TripManager.swift in Sources */,
 				0664F3AE2874303200F7EA1B /* MapController.swift in Sources */,
@@ -467,6 +482,7 @@
 				0664F3B62875865700F7EA1B /* VolunteersView.swift in Sources */,
 				06BDA70728740D44003CFF2F /* ForgetPasswordView.swift in Sources */,
 				0664F3B0287436C200F7EA1B /* Places.swift in Sources */,
+				06F1737C2876BD9A00F4A8C1 /* NewsTileView.swift in Sources */,
 				06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */,
 				0664F3C0287594C700F7EA1B /* UserProfilView.swift in Sources */,
 				0664F3CB2875B76300F7EA1B /* DetailedTripView.swift in Sources */,

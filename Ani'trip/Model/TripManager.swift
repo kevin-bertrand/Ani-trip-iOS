@@ -11,12 +11,14 @@ final class TripManager {
     // MARK: Public
     // MARK: Properties
     var trips: [Trip] { tripList.sorted {$0.startDate > $1.startDate}}
+    var numberOfTripThisWeek: Int = 0
+    var distanceThisWeek: Double = 0.0
+    var threeLatestTrips: [Trip] = []
     
     // MARK: Methods
     /// Getting trip list
     func getTripList() {
         // TODO: Perform API call
-        tripList = [Trip(id: UUID(), startDate: .now-1233423, endDate: .now, missions: ["Covoit"], comment: "Test", totalDistance: 34.3, startingAddress: Address(roadName: "Fulgence Bienvenue", roadType: "Place", streetNumber: "7", zipCode: "77600", city: "Bussy-saint-Georges", country: "France"), endingAddress: Address(roadName: "Henri Magisson", roadType: "Avenue", streetNumber: "15", zipCode: "7124", city: "Crégy-lès-Meaux", country: "France"))]
         sendNotification(.successGettingTripList)
     }
     
@@ -24,6 +26,12 @@ final class TripManager {
     func addNewTrip(_ trip: AddTrip) {
         // TODO: Perform API call
         sendNotification(.successAddingTrip)
+    }
+    
+    /// Downloading home informations
+    func downloadHomeInformations() {
+        // TODO: Perform API call
+        sendNotification(.successDownloadedHomeInformations)
     }
     
     // MARK: Private

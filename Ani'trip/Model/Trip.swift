@@ -27,3 +27,9 @@ struct AddTrip {
     var startingAddress: Address
     var endingAddress: Address
 }
+
+struct TripChartPoint: Identifiable {
+    let id = UUID()
+    let date: String
+    let value: Double
+}
