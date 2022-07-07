@@ -10,7 +10,7 @@ import Foundation
 
 final class NetworkManager: NetworkProtocol {
     /// Perform Alamofire request
-    func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader, body: [String: String], completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
+    func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader, body: Encodable?, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
         
         guard let formattedUrl = URL(string: "\(url)/\(urlParams.joined(separator: "/"))") else {
             completionHandler((nil, nil, nil))
@@ -19,12 +19,15 @@ final class NetworkManager: NetworkProtocol {
         
         do {
             let headers: HTTPHeaders = [
-                authorization
+                authorization,
+                .contentType("application/json; charset=utf-8")
             ]
             var request = try URLRequest(url: formattedUrl, method: method)
-            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            if let body = body {
+                request.httpBody = try JSONEncoder().encode(body)
+           }
             request.headers = headers
-            
+
             let alamofireRequest = AF.request(request).validate()
             alamofireRequest.response { data in
                 completionHandler((data.data, data.response, data.error))
@@ -36,18 +39,8 @@ final class NetworkManager: NetworkProtocol {
     }
     
     private let url = "http://192.168.1.164:80"
-    
-    private func formatHeaders(with authorisation: [String: String]) -> [String: String] {
-        var headers: [String: String] = ["Content-Type":"application/json"]
-        
-        if let credentials = authorisation.first {
-            headers[credentials.key] = credentials.value
-        }
-        
-        return headers
-    }
 }
 
 protocol NetworkProtocol {
-    func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader, body: [String: String], completionHandler: @escaping((Data?, HTTPURLResponse?, Error?))->Void)
+    func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader, body: Encodable?, completionHandler: @escaping((Data?, HTTPURLResponse?, Error?))->Void)
 }

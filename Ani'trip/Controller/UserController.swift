@@ -37,7 +37,9 @@ final class UserController: ObservableObject {
     
     // Update user informations
     @Published var showUpdateUserAlert: Bool = false
-    @Published var userToUpdate: UpdateUser = UpdateUser(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), password: "", passwordVerification: "")
+    @Published var userToUpdate: User = User(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), token: "")
+    @Published var updatePassword: String = ""
+    @Published var updatePasswordVerification: String = ""
     var updatePasswordError: String = ""
     
     // User profil
@@ -130,15 +132,26 @@ final class UserController: ObservableObject {
     func update() {
         showLoadingInProgressView = true
         
-        if (!userToUpdate.password.isEmpty == true) == !userToUpdate.passwordVerification.isEmpty {
-            guard userToUpdate.password == userToUpdate.passwordVerification else {
+        if (!updatePassword.isEmpty == true) == !updatePasswordVerification.isEmpty {
+            guard updatePassword == updatePasswordVerification else {
                 updatePasswordError = "Both password must match!"
                 showLoadingInProgressView = false
                 return
             }
         }
         
-        userManager.update(user: userToUpdate)
+        userManager.update(user: UpdateUser(id: userToUpdate.id,
+                                            firstname: userToUpdate.firstname,
+                                            lastname: userToUpdate.lastname,
+                                            email: userToUpdate.email,
+                                            phoneNumber: userToUpdate.phoneNumber,
+                                            gender: userToUpdate.gender,
+                                            position: userToUpdate.position,
+                                            missions: userToUpdate.missions,
+                                            isActive: userToUpdate.isActive,
+//                                            address: userToUpdate.address,
+                                            password: updatePassword,
+                                            passwordVerification: updatePasswordVerification))
     }
     
     // MARK: Init
@@ -206,7 +219,7 @@ final class UserController: ObservableObject {
         loginPassword = ""
         isLoggedIn = true
         if let user = connectedUser {
-            userToUpdate = UpdateUser(id: user.id, firstname: user.firstname, lastname: user.lastname, email: user.email, phoneNumber: user.phoneNumber, gender: user.gender, position: user.position, missions: user.missions, isActive: user.isActive, address: user.address, password: "", passwordVerification: "")
+            userToUpdate = user
             mapController.getAddressFromString(user.address) { location in
                 if let location = location {
                     self.userCoordinate = MKCoordinateRegion(center: location, latitudinalMeters: 750, longitudinalMeters: 750)

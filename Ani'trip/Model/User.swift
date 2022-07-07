@@ -21,15 +21,16 @@ struct ConnectedUser: Codable {
 
 struct User: Codable {
     let id: UUID
-    let firstname: String
-    let lastname: String
+    var firstname: String
+    var lastname: String
     let email: String
-    let phoneNumber: String
-    let gender: Gender
-    let position: Position
-    let missions: [String]
-    let isActive: Bool
-    let address: Address
+    var phoneNumber: String
+    var gender: Gender
+    var position: Position
+    var missions: [String]
+    var isActive: Bool
+    var address: Address
+    var token: String
 }
 
 struct UpdateUser: Codable {
@@ -42,7 +43,7 @@ struct UpdateUser: Codable {
     var position: Position
     var missions: [String]
     var isActive: Bool
-    var address: Address
+//    var address: Address
     var password: String
     var passwordVerification: String
 }

@@ -67,8 +67,8 @@ struct UpdateUserProfilView: View {
             }
             
             Section(header: Text("Security")) {
-                EditUserInfoTileView(text: $userController.userToUpdate.password, name: "Password", keyboardType: .phonePad)
-                EditUserInfoTileView(text: $userController.userToUpdate.passwordVerification, name: "Password Verification", keyboardType: .phonePad)
+                EditUserInfoTileView(text: $userController.updatePassword, name: "Password")
+                EditUserInfoTileView(text: $userController.updatePasswordVerification, name: "Password Verification")
             }
         }
         .toolbar {
