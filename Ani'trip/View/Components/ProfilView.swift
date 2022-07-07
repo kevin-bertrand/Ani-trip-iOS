@@ -34,17 +34,7 @@ struct ProfilView: View {
                 }.listRowBackground(EmptyView())
                 
                 Section(header: Text("Address")) {
-                    HStack {
-                        Map(coordinateRegion: $userController.userCoordinate, interactionModes: .zoom, annotationItems: userController.userPin) { location in
-                            MapMarker(coordinate: location.location, tint: .accentColor)
-                        }.frame(width: 100, height: 100)
-                        VStack(alignment: .leading) {
-                            Text("\(user.address.streetNumber), \(user.address.roadType) \(user.address.roadName)")
-                            Text("\(user.address.zipCode), \(user.address.city)")
-                            Text("\(user.address.country)")
-                        }
-                        .bold()
-                    }
+                    AddressTileView(region: $userController.userCoordinate, address: user.address, marker: userController.userPin)
                 }
                 
                 Section(header: Text("Contact informations")) {

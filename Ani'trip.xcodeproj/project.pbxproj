@@ -17,6 +17,12 @@
 		0664F3BC287586FC00F7EA1B /* VolunteerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3BB287586FC00F7EA1B /* VolunteerController.swift */; };
 		0664F3C0287594C700F7EA1B /* UserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3BF287594C700F7EA1B /* UserProfilView.swift */; };
 		0664F3C2287594EE00F7EA1B /* ProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C1287594EE00F7EA1B /* ProfilView.swift */; };
+		0664F3C42875A82D00F7EA1B /* TripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C32875A82D00F7EA1B /* TripController.swift */; };
+		0664F3C62875A85400F7EA1B /* TripManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C52875A85400F7EA1B /* TripManager.swift */; };
+		0664F3C82875AC1F00F7EA1B /* TripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C72875AC1F00F7EA1B /* TripView.swift */; };
+		0664F3CB2875B76300F7EA1B /* DetailedTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3CA2875B76300F7EA1B /* DetailedTripView.swift */; };
+		0664F3CD2875C1F000F7EA1B /* AddressTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3CC2875C1F000F7EA1B /* AddressTileView.swift */; };
+		0664F3CF2875C64600F7EA1B /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3CE2875C64600F7EA1B /* AddTripView.swift */; };
 		06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */; };
 		06BDA6C2287304A5003CFF2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BDA6C1287304A5003CFF2F /* Assets.xcassets */; };
 		06BDA6C5287304A5003CFF2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BDA6C4287304A5003CFF2F /* Preview Assets.xcassets */; };
@@ -39,6 +45,7 @@
 		06BDA709287417C0003CFF2F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA708287417C0003CFF2F /* AppView.swift */; };
 		06BDA70C28741B58003CFF2F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70B28741B58003CFF2F /* SettingsView.swift */; };
 		06BDA70F28742061003CFF2F /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BDA70E28742061003CFF2F /* UserCellView.swift */; };
+		06F173792876BC0700F4A8C1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F173782876BC0700F4A8C1 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +76,12 @@
 		0664F3BB287586FC00F7EA1B /* VolunteerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerController.swift; sourceTree = "<group>"; };
 		0664F3BF287594C700F7EA1B /* UserProfilView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilView.swift; sourceTree = "<group>"; };
 		0664F3C1287594EE00F7EA1B /* ProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilView.swift; sourceTree = "<group>"; };
+		0664F3C32875A82D00F7EA1B /* TripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripController.swift; sourceTree = "<group>"; };
+		0664F3C52875A85400F7EA1B /* TripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManager.swift; sourceTree = "<group>"; };
+		0664F3C72875AC1F00F7EA1B /* TripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripView.swift; sourceTree = "<group>"; };
+		0664F3CA2875B76300F7EA1B /* DetailedTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTripView.swift; sourceTree = "<group>"; };
+		0664F3CC2875C1F000F7EA1B /* AddressTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTileView.swift; sourceTree = "<group>"; };
+		0664F3CE2875C64600F7EA1B /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
 		06BDA6BA287304A3003CFF2F /* Ani'trip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ani'trip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BDA6BD287304A3003CFF2F /* Ani_tripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ani_tripApp.swift; sourceTree = "<group>"; };
 		06BDA6C1287304A5003CFF2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +107,7 @@
 		06BDA708287417C0003CFF2F /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		06BDA70B28741B58003CFF2F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		06BDA70E28742061003CFF2F /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
+		06F173782876BC0700F4A8C1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +142,15 @@
 				0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */,
 			);
 			path = SettingsSubviews;
+			sourceTree = "<group>";
+		};
+		0664F3C92875B74E00F7EA1B /* TripSubviews */ = {
+			isa = PBXGroup;
+			children = (
+				0664F3CA2875B76300F7EA1B /* DetailedTripView.swift */,
+				0664F3CE2875C64600F7EA1B /* AddTripView.swift */,
+			);
+			path = TripSubviews;
 			sourceTree = "<group>";
 		};
 		06BDA6B1287304A3003CFF2F = {
@@ -193,6 +216,7 @@
 				06BDA6EB28730555003CFF2F /* User.swift */,
 				06BDA6ED287305DE003CFF2F /* Address.swift */,
 				06BDA6EF2873068F003CFF2F /* Trip.swift */,
+				0664F3C52875A85400F7EA1B /* TripManager.swift */,
 				06BDA6FA28732F2F003CFF2F /* UserManager.swift */,
 				0664F3AF287436C200F7EA1B /* Places.swift */,
 				0664F3B7287586B000F7EA1B /* Volunteer.swift */,
@@ -219,6 +243,7 @@
 				06BDA6F828732CF8003CFF2F /* UserController.swift */,
 				0664F3AD2874303200F7EA1B /* MapController.swift */,
 				0664F3BB287586FC00F7EA1B /* VolunteerController.swift */,
+				0664F3C32875A82D00F7EA1B /* TripController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -241,6 +266,7 @@
 				06BDA6FF28733DDB003CFF2F /* SpinnerView.swift */,
 				06BDA70128734162003CFF2F /* LoadingVIew.swift */,
 				0664F3C1287594EE00F7EA1B /* ProfilView.swift */,
+				0664F3CC2875C1F000F7EA1B /* AddressTileView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -265,10 +291,13 @@
 		06BDA70A28741B4E003CFF2F /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				0664F3C92875B74E00F7EA1B /* TripSubviews */,
 				0664F3AA28742C5000F7EA1B /* SettingsSubviews */,
 				06BDA70D28741F92003CFF2F /* SettingsComponents */,
 				06BDA70B28741B58003CFF2F /* SettingsView.swift */,
 				0664F3B52875865700F7EA1B /* VolunteersView.swift */,
+				0664F3C72875AC1F00F7EA1B /* TripView.swift */,
+				06F173782876BC0700F4A8C1 /* HomeView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -415,11 +444,14 @@
 				06BDA6FB28732F2F003CFF2F /* UserManager.swift in Sources */,
 				06BDA6F02873068F003CFF2F /* Trip.swift in Sources */,
 				06BDA70528736A5E003CFF2F /* NewAccountView.swift in Sources */,
+				0664F3C82875AC1F00F7EA1B /* TripView.swift in Sources */,
 				06BDA6F728731344003CFF2F /* ButtonWithIcon.swift in Sources */,
+				06F173792876BC0700F4A8C1 /* HomeView.swift in Sources */,
 				06BDA6F928732CF8003CFF2F /* UserController.swift in Sources */,
 				06BDA6EE287305DE003CFF2F /* Address.swift in Sources */,
 				06BDA70228734162003CFF2F /* LoadingVIew.swift in Sources */,
 				06BDA6EC28730555003CFF2F /* User.swift in Sources */,
+				0664F3C62875A85400F7EA1B /* TripManager.swift in Sources */,
 				0664F3AE2874303200F7EA1B /* MapController.swift in Sources */,
 				0664F3B42874482200F7EA1B /* EditUserInfoTileView.swift in Sources */,
 				06BDA709287417C0003CFF2F /* AppView.swift in Sources */,
@@ -437,8 +469,12 @@
 				0664F3B0287436C200F7EA1B /* Places.swift in Sources */,
 				06BDA6F528730C82003CFF2F /* TextFieldWithIcon.swift in Sources */,
 				0664F3C0287594C700F7EA1B /* UserProfilView.swift in Sources */,
+				0664F3CB2875B76300F7EA1B /* DetailedTripView.swift in Sources */,
 				06BDA70028733DDB003CFF2F /* SpinnerView.swift in Sources */,
+				0664F3CF2875C64600F7EA1B /* AddTripView.swift in Sources */,
+				0664F3C42875A82D00F7EA1B /* TripController.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
+				0664F3CD2875C1F000F7EA1B /* AddressTileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,13 @@ extension Notification {
         
         // Volunteers
         case successGettingVolunteerList = "The list of volunteers is downloaded"
-        case errorGettingVolunteerList = "An error occurs during the downloading..."
+        case errorGettingVolunteerList = "An error occurs during the downloading of the ..."
+        
+        // Trips
+        case successGettingTripList = "The trip list is downloaded"
+        case errorGettingTripList = "An error occurs during the downloading of the trip list..."
+        case successAddingTrip = "The new trip is added"
+        case errorAddingTrip = "The new trip cannot be added!"
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")

@@ -9,10 +9,21 @@ import Foundation
 
 struct Trip: Codable {
     let id: UUID
-    let date: Date
+    let startDate: Date
+    let endDate: Date
     let missions: [String]
     let comment: String?
     let totalDistance: Double
     let startingAddress: Address
     let endingAddress: Address
+}
+
+struct AddTrip {
+    var startDate: Date
+    var endDate: Date
+    var missions: [String]
+    var comment: String
+    var totalDistance: String
+    var startingAddress: Address
+    var endingAddress: Address
 }

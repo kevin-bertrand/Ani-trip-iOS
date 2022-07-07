@@ -10,15 +10,17 @@ import SwiftUI
 struct AppView: View {
     var body: some View {
         TabView {
-            Text("Home")
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
             
-            Text("My trips")
-                .tabItem {
-                    Label("My trips", systemImage: "map.fill")
-                }
+            NavigationView {
+                TripView()
+            }
+            .tabItem {
+                Label("My trips", systemImage: "map.fill")
+            }
             
             NavigationView {
                 VolunteersView()
