@@ -31,6 +31,8 @@ struct TextFieldWithIcon: View {
                         SecureField(placeholder, text: $text)
                     } else {
                         TextField(placeholder, text: $text)
+                            .autocorrectionDisabled(keyboardType == .default ? false : true)
+                            .autocapitalization(keyboardType == .default ? .sentences : .none)
                     }
                 }.padding()
                     .keyboardType(keyboardType)
