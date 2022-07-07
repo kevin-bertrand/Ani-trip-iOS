@@ -16,14 +16,14 @@ final class TripController: ObservableObject {
     @Published var searchFilter: String = ""
     
     // Detailed trip
-    @Published var startAddress: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+    @Published var startAddress: MKCoordinateRegion
     var startPin: [Places] = []
-    @Published var endAddress: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+    @Published var endAddress: MKCoordinateRegion
     var endPin: [Places] = []
     
     // Add trip
     @Published var showSuccessAddingTripAlert: Bool = false
-    @Published var newTrip: AddTrip = AddTrip(startDate: .now, endDate: .now, missions: [], comment: "", totalDistance: "0", startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""))
+    @Published var newTrip: AddTrip
     
     // Home View
     var numberOfTripThisWeek: Int = 0
@@ -67,6 +67,11 @@ final class TripController: ObservableObject {
     
     // MARK: Init
     init() {
+        mapController = MapController()
+        newTrip = AddTrip(startDate: .now, endDate: .now, missions: [], comment: "", totalDistance: "0", startingAddress: mapController.emptyAddress, endingAddress: mapController.emptyAddress)
+        startAddress = mapController.defaultMapPoint
+        endAddress = mapController.defaultMapPoint
+        
         configureNotification(for: Notification.AniTrip.successGettingTripList.notificationName)
         configureNotification(for: Notification.AniTrip.errorGettingTripList.notificationName)
         configureNotification(for: Notification.AniTrip.successAddingTrip.notificationName)
@@ -78,7 +83,7 @@ final class TripController: ObservableObject {
     // MARK: Private
     // MARK: Properties
     private let tripManager: TripManager = TripManager()
-    private let mapController: MapController = MapController()
+    private let mapController: MapController
     
     // MARK: Methods
     /// Initialise all notification for this controller

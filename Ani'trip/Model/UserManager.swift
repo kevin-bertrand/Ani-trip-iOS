@@ -11,12 +11,30 @@ final class UserManager {
     // MARK: Public
     // MARK: Properties
     var user: User? { connecteUser }
+    var errorMessage: String = ""
     
     // MARK: Methods
     /// Perform the login of the user
     func login(user: UserToConnect) {
-        // TODO: Process login
-        sendNotification(.loginSuccess)
+        networkManager.request(urlParams: ["user", "login"], method: .post, authorization: .authorization(username: user.email, password: user.password), body: [:]) { [weak self] data, response, error in
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 200:
+                    self.successLogin(with: data)
+                case 401:
+                    self.sendErrorNotification(with: "Wrong credentials!")
+                case 460:
+                    self.sendErrorNotification(with: "Your account is not active yet!")
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!")
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!")
+            }
+            
+        }
     }
     
     /// Perform the creation of the new account
@@ -45,6 +63,8 @@ final class UserManager {
     // MARK: Private
     // MARK: Properties
     private var connecteUser: User?
+    private let networkManager = NetworkManager()
+    private let mapController = MapController()
     
     // MARK: Methods
     /// Send Notification
@@ -52,5 +72,38 @@ final class UserManager {
         let notificationName = notification.notificationName
         let notificationBuilder = Notification(name: notificationName, object: self, userInfo: ["name": notificationName])
         NotificationCenter.default.post(notificationBuilder)
+    }
+    
+    private func getBasicAuthentication(for user: UserToConnect) -> String {
+        var authentication: String = ""
+        
+        let credentials = "\(user.email):\(user.password)"
+        let dataCredentials = credentials.data(using: .utf8)
+
+        if let dataCredentials = dataCredentials {
+            let encodedCredentials = dataCredentials.base64EncodedString()
+            authentication = "Basic \(encodedCredentials)"
+        }
+        return authentication
+    }
+    
+    /// Decode data when success login
+    private func successLogin(with data: Data?) {
+        if let data = data,
+           let user = try? JSONDecoder().decode(ConnectedUser.self, from: data),
+           let userId = UUID(uuidString: user.id),
+           let gender = Gender(rawValue: user.gender),
+           let position = Position(rawValue: user.position) {
+            connecteUser = User(id: userId, firstname: user.firstname, lastname: user.lastname, email: user.email, phoneNumber: user.phoneNumber, gender: gender, position: position, missions: user.missions, isActive: true, address: self.mapController.emptyAddress)
+            sendNotification(.loginSuccess)
+        } else {
+            sendErrorNotification(with: "Unknown error! Try later!")
+        }
+    }
+    
+    /// Configure and send error notification
+    private func sendErrorNotification(with error: String) {
+        errorMessage = error
+        sendNotification(.loginFailled)
     }
 }

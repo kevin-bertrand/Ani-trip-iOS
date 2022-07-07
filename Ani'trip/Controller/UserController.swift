@@ -62,7 +62,7 @@ final class UserController: ObservableObject {
             return
         }
         
-        userManager.login(user: UserToConnect(email: loginEmail, password: loginPassword))
+        userManager.login(user: UserToConnect(email: loginEmail.trimmingCharacters(in: .whitespacesAndNewlines), password: loginPassword))
     }
     
     /// Perform the creation of the new account
@@ -175,7 +175,7 @@ final class UserController: ObservableObject {
                 
                 switch notificationName {
                 case Notification.AniTrip.loginFailled.notificationName:
-                    self.errorMessage = Notification.AniTrip.loginFailled.notificationMessage
+                    self.errorMessage = self.userManager.errorMessage
                 case Notification.AniTrip.loginSuccess.notificationName:
                     self.loginSuccess()
                 case Notification.AniTrip.successfullCreation.notificationName:

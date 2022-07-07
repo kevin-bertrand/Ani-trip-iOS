@@ -7,6 +7,18 @@
 
 import Foundation
 
+struct ConnectedUser: Codable {
+    let id: String
+    let firstname: String
+    let lastname: String
+    let email: String
+    let phoneNumber: String
+    let gender: String
+    let position: String
+    let missions: [String]
+    let token: String
+}
+
 struct User: Codable {
     let id: UUID
     let firstname: String
@@ -40,15 +52,15 @@ struct UserToConnect {
     var password: String
 }
 
-enum Gender: Codable {
-    case man
-    case woman
-    case notDeterminded
+enum Gender: String, Codable {
+    case man = "man"
+    case woman = "woman"
+    case notDeterminded = "not_determined"
 }
 
 enum Position: String, Codable, CaseIterable {
-    case admin = "Administrator"
-    case user = "User"
+    case admin = "admin"
+    case user = "user"
     
     var name: String { rawValue }
 }

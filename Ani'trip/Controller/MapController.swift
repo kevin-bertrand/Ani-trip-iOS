@@ -7,10 +7,13 @@
 
 import CoreLocation
 import Foundation
+import MapKit
 
 final class MapController: ObservableObject {
     // MARK: Public
     // MARK: Properties
+    let emptyAddress: Address = Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")
+    let defaultMapPoint: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
     
     // MARK: Methods
     func getAddressFromString(_ address: Address, completionHandler: @escaping ((CLLocationCoordinate2D?)->Void)) {

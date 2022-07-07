@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065E46F72877158900D32E05 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46F62877158900D32E05 /* NetworkManager.swift */; };
+		065E46FA287721F500D32E05 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 065E46F9287721F500D32E05 /* Alamofire */; };
 		0664F3AE2874303200F7EA1B /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AD2874303200F7EA1B /* MapController.swift */; };
 		0664F3B0287436C200F7EA1B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AF287436C200F7EA1B /* Places.swift */; };
 		0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */; };
@@ -68,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		065E46F62877158900D32E05 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0664F3AD2874303200F7EA1B /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		0664F3AF287436C200F7EA1B /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserProfilView.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065E46FA287721F500D32E05 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +230,7 @@
 				0664F3AF287436C200F7EA1B /* Places.swift */,
 				0664F3B7287586B000F7EA1B /* Volunteer.swift */,
 				0664F3B9287586C000F7EA1B /* VolunteerManager.swift */,
+				065E46F62877158900D32E05 /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -341,6 +346,9 @@
 			dependencies = (
 			);
 			name = "Ani'trip";
+			packageProductDependencies = (
+				065E46F9287721F500D32E05 /* Alamofire */,
+			);
 			productName = "Ani'trip";
 			productReference = 06BDA6BA287304A3003CFF2F /* Ani'trip.app */;
 			productType = "com.apple.product-type.application";
@@ -413,6 +421,9 @@
 				Base,
 			);
 			mainGroup = 06BDA6B1287304A3003CFF2F;
+			packageReferences = (
+				065E46F8287721F500D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 06BDA6BB287304A3003CFF2F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -474,6 +485,7 @@
 				0664F3BA287586C000F7EA1B /* VolunteerManager.swift in Sources */,
 				06BDA6FE2873329D003CFF2F /* Notification.swift in Sources */,
 				0664F3C2287594EE00F7EA1B /* ProfilView.swift in Sources */,
+				065E46F72877158900D32E05 /* NetworkManager.swift in Sources */,
 				0664F3BC287586FC00F7EA1B /* VolunteerController.swift in Sources */,
 				06BDA6F228730761003CFF2F /* LoginView.swift in Sources */,
 				0664F3B8287586B000F7EA1B /* Volunteer.swift in Sources */,
@@ -817,6 +829,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		065E46F8287721F500D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		065E46F9287721F500D32E05 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 065E46F8287721F500D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 06BDA6B2287304A3003CFF2F /* Project object */;
 }
