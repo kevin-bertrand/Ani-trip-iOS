@@ -17,14 +17,14 @@ struct Ani_tripApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-//                if userController.isLoggedIn {
+                if userController.isLoggedIn {
                     AppView()
                         .environmentObject(mapController)
                         .environmentObject(volunteerController)
                         .environmentObject(tripController)
-//                } else {
-//                    LoginView()
-//                }
+                } else {
+                    LoginView()
+                }
             }
             .environmentObject(userController)
             .fullScreenCover(isPresented: $userController.showLoadingInProgressView) {
