@@ -62,6 +62,6 @@ struct ProfilView: View {
 
 struct ProfilView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilView(user: User(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, address: Address(roadName: "", roadType: "", streetNumber: "", zipCode: "", city: "", country: ""), token: ""))
+        ProfilView(user: User(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, address: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), token: ""))
     }
 }

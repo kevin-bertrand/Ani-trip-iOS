@@ -68,7 +68,7 @@ struct DetailedTripView: View {
 
 struct DetailedTripView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedTripView(trip: Trip(id: UUID(), startDate: .now-1234567, endDate: .now, missions: [], comment: nil, totalDistance: 0.0, startingAddress: Address(roadName: "", roadType: "", streetNumber: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", zipCode: "", city: "", country: "")))
+        DetailedTripView(trip: Trip(id: UUID(), startDate: .now-1234567, endDate: .now, missions: [], comment: nil, totalDistance: 0.0, startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")))
             .environmentObject(TripController())
     }
 }

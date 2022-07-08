@@ -18,29 +18,34 @@ struct UpdateUserProfilView: View {
                 EditUserInfoTileView(text: $userController.userToUpdate.lastname, name: "Lastname")
             }
             
-            Section(header: Text("Address")) {
-                HStack {
-                    TextField("Type", text: $userController.userToUpdate.address.roadType)
-                        .frame(width: 75)
+            Group {
+                Section(header: Text("Address")) {
+                    HStack {
+                        TextField("Number", text: $userController.userToUpdate.address.streetNumber)
+                        TextField("Type", text: $userController.userToUpdate.address.roadType)
+                    }
                     TextField("Street name", text: $userController.userToUpdate.address.roadName)
+                        .textInputAutocapitalization(.words)
+                    TextField("Complement", text: $userController.userToUpdate.address.complement)
+                    HStack {
+                        TextField("Zip code", text: $userController.userToUpdate.address.zipCode)
+                            .frame(width: 75)
+                        TextField("City", text: $userController.userToUpdate.address.city)
+                    }
+                    TextField("Country", text: $userController.userToUpdate.address.country)
                 }
-                HStack {
-                    TextField("Zip code", text: $userController.userToUpdate.address.zipCode)
-                        .frame(width: 75)
-                    TextField("City", text: $userController.userToUpdate.address.city)
+                
+                Section(header: Text("Contact")) {
+                    HStack {
+                        Text("Email")
+                        Spacer()
+                        Text(userController.userToUpdate.email)
+                            .foregroundColor(.gray)
+                    }
+                    EditUserInfoTileView(text: $userController.userToUpdate.phoneNumber, name: "Phone", keyboardType: .phonePad)
                 }
-                TextField("Country", text: $userController.userToUpdate.address.country)
             }
-            
-            Section(header: Text("Contact")) {
-                HStack {
-                    Text("Email")
-                    Spacer()
-                    Text(userController.userToUpdate.email)
-                        .foregroundColor(.gray)
-                }
-                EditUserInfoTileView(text: $userController.userToUpdate.phoneNumber, name: "Phone", keyboardType: .phonePad)
-            }
+            .autocorrectionDisabled()
             
             Section(header: Text("Association")) {
                 if userController.connectedUser?.position == .admin {

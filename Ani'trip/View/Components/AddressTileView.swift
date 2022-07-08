@@ -20,6 +20,9 @@ struct AddressTileView: View {
             }.frame(width: 100, height: 100)
             VStack(alignment: .leading) {
                 Text("\(address.streetNumber), \(address.roadType) \(address.roadName)")
+                if let complement = address.complement {
+                    Text(complement)
+                }
                 Text("\(address.zipCode), \(address.city)")
                 Text("\(address.country)")
             }
@@ -30,6 +33,6 @@ struct AddressTileView: View {
 
 struct AddressTileView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressTileView(region: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 20, longitude: 20), latitudinalMeters: 20, longitudinalMeters: 20)), address: Address(roadName: "", roadType: "", streetNumber: "", zipCode: "", city: "", country: ""), marker: [])
+        AddressTileView(region: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 20, longitude: 20), latitudinalMeters: 20, longitudinalMeters: 20)), address: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), marker: [])
     }
 }
