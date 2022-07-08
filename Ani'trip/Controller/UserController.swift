@@ -37,7 +37,7 @@ final class UserController: ObservableObject {
     
     // Update user informations
     @Published var showUpdateUserAlert: Bool = false
-    @Published var userToUpdate: User
+    @Published var userToUpdate: UpdateUser
     @Published var updatePassword: String = ""
     @Published var updatePasswordVerification: String = ""
     var updatePasswordError: String = ""
@@ -45,6 +45,14 @@ final class UserController: ObservableObject {
     // User profil
     @Published var userCoordinate: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
     var userPin: [Places] = []
+    
+    // Volunteers view
+    @Published var volunteersList: [User] = []
+    @Published var searchFilter: String = "" {
+        didSet {
+            filterVolunteersList()
+        }
+    }
     
     // MARK: Methods
     /// Login user
@@ -140,23 +148,17 @@ final class UserController: ObservableObject {
             }
         }
         
-        userManager.update(user: UpdateUser(id: userToUpdate.id,
-                                            firstname: userToUpdate.firstname,
-                                            lastname: userToUpdate.lastname,
-                                            email: userToUpdate.email,
-                                            phoneNumber: userToUpdate.phoneNumber,
-                                            gender: userToUpdate.gender,
-                                            position: userToUpdate.position,
-                                            missions: userToUpdate.missions,
-                                            isActive: userToUpdate.isActive,
-                                            address: userToUpdate.address,
-                                            password: updatePassword,
-                                            passwordVerification: updatePasswordVerification))
+        userManager.update(user: userToUpdate)
+    }
+    
+    /// Getting the list of all volunteers
+    func getVolunteerList() {
+        userManager.getVolunteerList()
     }
     
     // MARK: Init
     init() {
-        userToUpdate = User(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: mapController.emptyAddress, token: "")
+        userToUpdate = .init(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: mapController.emptyAddress, password: "", passwordVerification: "")
         
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
         configureNotification(for: Notification.AniTrip.loginFailled.notificationName)
@@ -166,6 +168,8 @@ final class UserController: ObservableObject {
         configureNotification(for: Notification.AniTrip.errorDuringRequestForNewPassword.notificationName)
         configureNotification(for: Notification.AniTrip.successUserUpdate.notificationName)
         configureNotification(for: Notification.AniTrip.errorDuringUpdatingUser.notificationName)
+        configureNotification(for: Notification.AniTrip.successGettingVolunteerList.notificationName)
+        configureNotification(for: Notification.AniTrip.errorGettingVolunteerList.notificationName)
     }
     
     // MARK: Private
@@ -205,6 +209,8 @@ final class UserController: ObservableObject {
             case Notification.AniTrip.errorDuringUpdatingUser.notificationName:
                 errorMessage = self.userManager.errorMessage
                 showUpdateUserAlert = true
+            case Notification.AniTrip.successGettingVolunteerList.notificationName:
+                self.volunteersList = self.userManager.volunteers
             default: break
             }
         }
@@ -220,13 +226,28 @@ final class UserController: ObservableObject {
         loginPassword = ""
         isLoggedIn = true
         if let user = connectedUser {
-            userToUpdate = user
-            mapController.getAddressFromString(user.address) { location in
-                if let location = location {
-                    self.userCoordinate = MKCoordinateRegion(center: location, latitudinalMeters: 750, longitudinalMeters: 750)
-                    self.userPin = [Places(lat: location.latitude, lon: location.longitude)]
+            userToUpdate = UpdateUser(id: user.id ?? UUID(), firstname: user.firstname, lastname: user.lastname, email: user.email, phoneNumber: user.phoneNumber, gender: user.gender, position: user.position, missions: user.missions, isActive: user.isActive, address: user.address ?? mapController.emptyAddress, password: "", passwordVerification: "")
+            if let address = user.address {
+                mapController.getAddressFromString(address) { location in
+                    if let location = location {
+                        self.userCoordinate = MKCoordinateRegion(center: location, latitudinalMeters: 750, longitudinalMeters: 750)
+                        self.userPin = [Places(lat: location.latitude, lon: location.longitude)]
+                    }
                 }
             }
+            
+            DispatchQueue.main.async {
+                self.getVolunteerList()
+            }
+        }
+    }
+    
+    /// Filter volunteers list
+    private func filterVolunteersList() {
+        if searchFilter.isEmpty {
+            volunteersList = userManager.volunteers
+        } else {
+            volunteersList = userManager.volunteers.filter { $0.firstname.localizedCaseInsensitiveContains(searchFilter) || $0.lastname.localizedCaseInsensitiveContains(searchFilter) || !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty }
         }
     }
 }

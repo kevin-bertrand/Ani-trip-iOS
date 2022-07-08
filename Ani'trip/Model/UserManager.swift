@@ -11,6 +11,7 @@ final class UserManager {
     // MARK: Public
     // MARK: Properties
     var user: User? { connecteUser }
+    var volunteers: [User] { volunteersList.sorted {$0.firstname.lowercased() < $1.firstname.lowercased()} }
     var errorMessage: String = ""
     
     // MARK: Methods
@@ -71,35 +72,63 @@ final class UserManager {
     
     /// Update the user informations
     func update(user: UpdateUser) {
-        if let connecteUser = connecteUser {
-            networkManager.request(urlParams: ["user"], method: .patch, authorization: .authorization(bearerToken: connecteUser.token), body: user) { [weak self] data, response, error in
-                if let self = self,
-                   let response = response,
-                   let statusCode = response.statusCode {
-                    switch statusCode {
-                    case 202:
-                        self.successUpdate(with: data)
-                    case 401:
-                        self.sendErrorNotification(with: "Your are not authorised to perform this operation!", for: .errorDuringUpdatingUser)
-                    case 406:
-                        self.sendErrorNotification(with: "Your user account was not found!", for: .errorDuringUpdatingUser)
-                    case 460:
-                        self.sendErrorNotification(with: "Your account is not active yet!", for: .errorDuringUpdatingUser)
-                    default:
-                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
-                    }
-                } else {
-                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
-                }
-            }
-        } else {
+        guard let connecteUser = connecteUser else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
+            return
+        }
+        
+        networkManager.request(urlParams: ["user"], method: .patch, authorization: .authorization(bearerToken: connecteUser.token), body: user) { [weak self] data, response, error in
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 202:
+                    self.successUpdate(with: data)
+                case 401:
+                    self.sendErrorNotification(with: "Your are not authorised to perform this operation!", for: .errorDuringUpdatingUser)
+                case 406:
+                    self.sendErrorNotification(with: "Your user account was not found!", for: .errorDuringUpdatingUser)
+                case 460:
+                    self.sendErrorNotification(with: "Your account is not active yet!", for: .errorDuringUpdatingUser)
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
+            }
+        }
+    }
+    
+    /// Getting the list of all volunteers
+    func getVolunteerList() {
+        print("ok")
+        guard let connecteUser = connecteUser else {
+            print("here")
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
+            return
+        }
+        
+        networkManager.request(urlParams: ["user"], method: .get, authorization: .authorization(bearerToken: connecteUser.token), body: nil) { [weak self] data, response, error in
+            print(response)
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 200:
+                    self.successGettingVolunteersList(with: data)
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
+            }
         }
     }
     
     // MARK: Private
     // MARK: Properties
     private var connecteUser: User?
+    private var volunteersList: [User] = []
     private let networkManager = NetworkManager()
     private let mapController = MapController()
     
@@ -116,7 +145,7 @@ final class UserManager {
         
         let credentials = "\(user.email):\(user.password)"
         let dataCredentials = credentials.data(using: .utf8)
-
+        
         if let dataCredentials = dataCredentials {
             let encodedCredentials = dataCredentials.base64EncodedString()
             authentication = "Basic \(encodedCredentials)"
@@ -146,6 +175,17 @@ final class UserManager {
             sendNotification(.loginSuccess)
         } else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .loginFailled)
+        }
+    }
+    
+    /// Decode data when success downloading volunteer list
+    private func successGettingVolunteersList(with data: Data?) {
+        if let data = data,
+           let users = try? JSONDecoder().decode([User].self, from: data) {
+            volunteersList = users
+            sendNotification(.successGettingVolunteerList)
+        } else {
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
         }
     }
     

@@ -21,7 +21,7 @@ struct ConnectedUser: Codable {
 }
 
 struct User: Codable {
-    let id: UUID
+    let id: UUID?
     var firstname: String
     var lastname: String
     let email: String
@@ -30,7 +30,7 @@ struct User: Codable {
     var position: Position
     var missions: [String]
     var isActive: Bool
-    var address: Address
+    var address: Address?
     var token: String
 }
 

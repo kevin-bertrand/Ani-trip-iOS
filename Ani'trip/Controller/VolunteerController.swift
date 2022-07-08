@@ -24,7 +24,9 @@ final class VolunteerController: ObservableObject {
     }
 
     // MARK: Init
-    init() {
+    init(userController: UserController) {
+        self.userController = userController
+        
         configureNotification(for: Notification.AniTrip.successGettingVolunteerList.notificationName)
         configureNotification(for: Notification.AniTrip.errorGettingVolunteerList.notificationName)
     }
@@ -32,6 +34,7 @@ final class VolunteerController: ObservableObject {
     // MARK: Private
     // MARK: Properties
     private let volunteerManager: VolunteerManager = VolunteerManager()
+    private let userController: UserController
     
     // MARK: Methods
     /// Filter list

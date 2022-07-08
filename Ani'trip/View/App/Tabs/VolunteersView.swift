@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct VolunteersView: View {
-    @EnvironmentObject var volunteerController: VolunteerController
+    @EnvironmentObject var userController: UserController
     
     var body: some View {
         List {
-            ForEach(volunteerController.volunteersList, id: \.id) { volunteer in
+            ForEach(userController.volunteersList, id: \.id) { volunteer in
                 NavigationLink {
                     ProfilView(user: volunteer)
                 } label: {
@@ -25,16 +25,18 @@ struct VolunteersView: View {
                                 .bold()
                                 .font(.title2)
                             Text(volunteer.missions.joined(separator: ", "))
-                            Text("📍 \(volunteer.address.city)")
+                            if let address = volunteer.address {
+                                Text("📍 \(address.city)")
+                            }
                         }
                     }
                 }
             }
         }
         .onAppear {
-            volunteerController.getVolunteerList()
+            userController.getVolunteerList()
         }
-        .searchable(text: $volunteerController.searchFilter)
+        .searchable(text: $userController.searchFilter)
         .navigationTitle(Text("👥 Volunteers"))
     }
 }
@@ -43,7 +45,7 @@ struct VolunteersView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             VolunteersView()
-                .environmentObject(VolunteerController())
+                .environmentObject(UserController())
         }
     }
 }

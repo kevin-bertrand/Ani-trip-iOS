@@ -34,7 +34,12 @@ struct ProfilView: View {
                 }.listRowBackground(EmptyView())
                 
                 Section(header: Text("Address")) {
-                    AddressTileView(region: $userController.userCoordinate, address: user.address, marker: userController.userPin)
+                    if let address = user.address {
+                        AddressTileView(region: $userController.userCoordinate, address: address, marker: userController.userPin)
+                    } else {
+                        Text("No address")
+                            .bold()
+                    }
                 }
                 
                 Section(header: Text("Contact informations")) {

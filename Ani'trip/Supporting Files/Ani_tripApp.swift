@@ -11,7 +11,6 @@ import SwiftUI
 struct Ani_tripApp: App {
     @StateObject private var userController: UserController = UserController()
     @StateObject private var mapController: MapController = MapController()
-    @StateObject private var volunteerController: VolunteerController = VolunteerController()
     @StateObject private var tripController: TripController = TripController()
     
     var body: some Scene {
@@ -20,7 +19,6 @@ struct Ani_tripApp: App {
                 if userController.isLoggedIn {
                     AppView()
                         .environmentObject(mapController)
-                        .environmentObject(volunteerController)
                         .environmentObject(tripController)
                 } else {
                     LoginView()

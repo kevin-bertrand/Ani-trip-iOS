@@ -15,13 +15,26 @@ final class VolunteerManager {
     // MARK: Methods
     /// Getting the list of all volunteers
     func getVolunteerList() {
-        // TODO: Perform API call
-        sendNotification(.successGettingVolunteerList)
+        networkManager.request(urlParams: ["user"], method: .get, authorization: nil, body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 200:
+                    self.sendNotification(.successGettingVolunteerList)
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
+            }
+        }
     }
     
     
     // MARK: Private
     // MARK: Properties
+    private let networkManager = NetworkManager()
     private var volunteersList: [User] = []
     
     // MARK: Methods
@@ -31,5 +44,10 @@ final class VolunteerManager {
         let notificationName = notification.notificationName
         let notificationBuilder = Notification(name: notificationName, object: self, userInfo: ["name": notificationName])
         NotificationCenter.default.post(notificationBuilder)
+    }
+    
+    /// Configure and send error notification
+    private func sendErrorNotification(with error: String, for notification: Notification.AniTrip) {
+        sendNotification(notification)
     }
 }
