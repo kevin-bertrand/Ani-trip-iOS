@@ -32,8 +32,8 @@ final class TripController: ObservableObject {
     
     // MARK: Methods
     /// Downloading trip list
-    func getTripList() {
-        tripManager.getTripList()
+    func getTripList(for user: User) {
+        tripManager.getTripList(for: user)
     }
     
     /// Getting map pin from address at displaying detailed
@@ -56,8 +56,8 @@ final class TripController: ObservableObject {
     }
     
     /// Adding a new trip
-    func addNewTrip() {
-        tripManager.addNewTrip(newTrip)
+    func addNewTrip(for user: User) {
+        tripManager.addNewTrip(newTrip, for: user)
     }
     
     /// Getting informations at home on appear
@@ -68,7 +68,7 @@ final class TripController: ObservableObject {
     // MARK: Init
     init() {
         mapController = MapController()
-        newTrip = AddTrip(startDate: .now, endDate: .now, missions: [], comment: "", totalDistance: "0", startingAddress: mapController.emptyAddress, endingAddress: mapController.emptyAddress)
+        newTrip = AddTrip(date: .now, missions: [], comment: "", totalDistance: "", startingAddress: mapController.emptyAddress, endingAddress: mapController.emptyAddress)
         startAddress = mapController.defaultMapPoint
         endAddress = mapController.defaultMapPoint
         

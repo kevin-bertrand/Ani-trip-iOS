@@ -101,15 +101,12 @@ final class UserManager {
     
     /// Getting the list of all volunteers
     func getVolunteerList() {
-        print("ok")
         guard let connecteUser = connecteUser else {
-            print("here")
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
             return
         }
         
         networkManager.request(urlParams: ["user"], method: .get, authorization: .authorization(bearerToken: connecteUser.token), body: nil) { [weak self] data, response, error in
-            print(response)
             if let self = self,
                let response = response,
                let statusCode = response.statusCode {

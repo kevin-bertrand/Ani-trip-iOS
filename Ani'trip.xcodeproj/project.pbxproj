@@ -14,9 +14,6 @@
 		0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */; };
 		0664F3B42874482200F7EA1B /* EditUserInfoTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B32874482200F7EA1B /* EditUserInfoTileView.swift */; };
 		0664F3B62875865700F7EA1B /* VolunteersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B52875865700F7EA1B /* VolunteersView.swift */; };
-		0664F3B8287586B000F7EA1B /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B7287586B000F7EA1B /* Volunteer.swift */; };
-		0664F3BA287586C000F7EA1B /* VolunteerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B9287586C000F7EA1B /* VolunteerManager.swift */; };
-		0664F3BC287586FC00F7EA1B /* VolunteerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3BB287586FC00F7EA1B /* VolunteerController.swift */; };
 		0664F3C0287594C700F7EA1B /* UserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3BF287594C700F7EA1B /* UserProfilView.swift */; };
 		0664F3C2287594EE00F7EA1B /* ProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C1287594EE00F7EA1B /* ProfilView.swift */; };
 		0664F3C42875A82D00F7EA1B /* TripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3C32875A82D00F7EA1B /* TripController.swift */; };
@@ -76,9 +73,6 @@
 		0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserProfilView.swift; sourceTree = "<group>"; };
 		0664F3B32874482200F7EA1B /* EditUserInfoTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoTileView.swift; sourceTree = "<group>"; };
 		0664F3B52875865700F7EA1B /* VolunteersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersView.swift; sourceTree = "<group>"; };
-		0664F3B7287586B000F7EA1B /* Volunteer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
-		0664F3B9287586C000F7EA1B /* VolunteerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerManager.swift; sourceTree = "<group>"; };
-		0664F3BB287586FC00F7EA1B /* VolunteerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerController.swift; sourceTree = "<group>"; };
 		0664F3BF287594C700F7EA1B /* UserProfilView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilView.swift; sourceTree = "<group>"; };
 		0664F3C1287594EE00F7EA1B /* ProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilView.swift; sourceTree = "<group>"; };
 		0664F3C32875A82D00F7EA1B /* TripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripController.swift; sourceTree = "<group>"; };
@@ -228,8 +222,6 @@
 				06BDA6EB28730555003CFF2F /* User.swift */,
 				06BDA6FA28732F2F003CFF2F /* UserManager.swift */,
 				0664F3AF287436C200F7EA1B /* Places.swift */,
-				0664F3B7287586B000F7EA1B /* Volunteer.swift */,
-				0664F3B9287586C000F7EA1B /* VolunteerManager.swift */,
 				065E46F62877158900D32E05 /* NetworkManager.swift */,
 			);
 			path = Model;
@@ -252,7 +244,6 @@
 			children = (
 				06BDA6F828732CF8003CFF2F /* UserController.swift */,
 				0664F3AD2874303200F7EA1B /* MapController.swift */,
-				0664F3BB287586FC00F7EA1B /* VolunteerController.swift */,
 				0664F3C32875A82D00F7EA1B /* TripController.swift */,
 			);
 			path = Controller;
@@ -482,13 +473,10 @@
 				0664F3B42874482200F7EA1B /* EditUserInfoTileView.swift in Sources */,
 				06BDA709287417C0003CFF2F /* AppView.swift in Sources */,
 				06BDA70C28741B58003CFF2F /* SettingsView.swift in Sources */,
-				0664F3BA287586C000F7EA1B /* VolunteerManager.swift in Sources */,
 				06BDA6FE2873329D003CFF2F /* Notification.swift in Sources */,
 				0664F3C2287594EE00F7EA1B /* ProfilView.swift in Sources */,
 				065E46F72877158900D32E05 /* NetworkManager.swift in Sources */,
-				0664F3BC287586FC00F7EA1B /* VolunteerController.swift in Sources */,
 				06BDA6F228730761003CFF2F /* LoginView.swift in Sources */,
-				0664F3B8287586B000F7EA1B /* Volunteer.swift in Sources */,
 				0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */,
 				06BDA70F28742061003CFF2F /* UserCellView.swift in Sources */,
 				0664F3B62875865700F7EA1B /* VolunteersView.swift in Sources */,
@@ -667,8 +655,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -697,8 +684,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

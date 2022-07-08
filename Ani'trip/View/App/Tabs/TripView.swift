@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripView: View {
     @EnvironmentObject var tripController: TripController
+    @EnvironmentObject var userController: UserController
     
     var body: some View {
         List {
@@ -21,7 +22,9 @@ struct TripView: View {
             }
         }
         .onAppear {
-            tripController.getTripList()
+            if let connectedUser = userController.connectedUser {
+                tripController.getTripList(for: connectedUser)
+            }
         }
         .navigationTitle(Text("📍 Trips"))
         .searchable(text: $tripController.searchFilter)
@@ -40,6 +43,7 @@ struct TripView_Previews: PreviewProvider {
         NavigationView {
             TripView()
                 .environmentObject(TripController())
+                .environmentObject(UserController())
         }
     }
 }

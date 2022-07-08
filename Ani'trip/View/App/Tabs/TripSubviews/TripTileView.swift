@@ -19,7 +19,7 @@ struct TripTileView: View {
                 Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)")
                     .bold()
                     .font(.title2)
-                Text(trip.startDate.formatted(date: .numeric, time: .shortened))
+                Text(trip.date.formatted(date: .numeric, time: .omitted))
                 Text("\(trip.totalDistance) km")
             }
         }
@@ -28,6 +28,6 @@ struct TripTileView: View {
 
 struct TripTileView_Previews: PreviewProvider {
     static var previews: some View {
-        TripTileView(trip: Trip(id: UUID(), startDate: .now, endDate: .now, missions: [], comment: "", totalDistance: 0.0, startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")))
+        TripTileView(trip: Trip(id: UUID(), date: .now, missions: [], comment: "", totalDistance: 0.0, startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")))
     }
 }

@@ -21,23 +21,19 @@ final class NetworkManager: NetworkProtocol {
             var headers: HTTPHeaders = [
                 .contentType("application/json; charset=utf-8")
             ]
-            print("A")
             if let authorization = authorization {
                 headers.add(authorization)
             }
-            print("B")
             var request = try URLRequest(url: formattedUrl, method: method)
             if let body = body {
                 request.httpBody = try JSONEncoder().encode(body)
            }
-            print("C")
             request.headers = headers
-            
             AF.request(request).responseData(completionHandler: { data in
                 completionHandler((data.data, data.response, data.error))
             })
         } catch let error {
-            print(error)
+            print(error.localizedDescription)
             completionHandler((nil, nil, nil))
         }
     }

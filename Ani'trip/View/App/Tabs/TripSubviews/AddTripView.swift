@@ -10,6 +10,7 @@ import SwiftUI
 struct AddTripView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var tripController: TripController
+    @EnvironmentObject var userController: UserController
     
     var body: some View {
         Form {
@@ -19,10 +20,11 @@ struct AddTripView: View {
                         .font(.callout)
                         .foregroundColor(.gray)
                     HStack {
+                        TextField("Number", text: $tripController.newTrip.startingAddress.streetNumber)
                         TextField("Type", text: $tripController.newTrip.startingAddress.roadType)
-                            .frame(width: 75)
-                        TextField("Street name", text: $tripController.newTrip.startingAddress.roadName)
                     }
+                    TextField("Street name", text: $tripController.newTrip.startingAddress.roadName)
+                    TextField("Complement", text: $tripController.newTrip.startingAddress.complement)
                     HStack {
                         TextField("Zip code", text: $tripController.newTrip.startingAddress.zipCode)
                             .frame(width: 75)
@@ -38,10 +40,11 @@ struct AddTripView: View {
                         .font(.callout)
                         .foregroundColor(.gray)
                     HStack {
+                        TextField("Number", text: $tripController.newTrip.endingAddress.streetNumber)
                         TextField("Type", text: $tripController.newTrip.endingAddress.roadType)
-                            .frame(width: 75)
-                        TextField("Street name", text: $tripController.newTrip.endingAddress.roadName)
                     }
+                    TextField("Street name", text: $tripController.newTrip.endingAddress.roadName)
+                    TextField("Complement", text: $tripController.newTrip.endingAddress.complement)
                     HStack {
                         TextField("Zip code", text: $tripController.newTrip.endingAddress.zipCode)
                             .frame(width: 75)
@@ -52,8 +55,7 @@ struct AddTripView: View {
             }
             
             Section(header: Text("Trip information")) {
-                DatePicker("Start date", selection: $tripController.newTrip.startDate)
-                DatePicker("End date", selection: $tripController.newTrip.endDate)
+                DatePicker("Date", selection: $tripController.newTrip.date)
                 Toggle("Auto distance calculation", isOn: .constant(false))
                     .disabled(true)
                 HStack {
@@ -74,10 +76,13 @@ struct AddTripView: View {
             }
         }
         .toolbar {
-            Button {
-                tripController.addNewTrip()
-            } label: {
-                Image(systemName: "v.circle")
+            if let connectedUser = userController.connectedUser {
+                Button {
+                    tripController.addNewTrip(for: connectedUser)
+                    
+                } label: {
+                    Image(systemName: "v.circle")
+                }
             }
         }
         .alert(isPresented: $tripController.showSuccessAddingTripAlert) {
@@ -92,5 +97,6 @@ struct AddTripView_Previews: PreviewProvider {
     static var previews: some View {
         AddTripView()
             .environmentObject(TripController())
+            .environmentObject(UserController())
     }
 }

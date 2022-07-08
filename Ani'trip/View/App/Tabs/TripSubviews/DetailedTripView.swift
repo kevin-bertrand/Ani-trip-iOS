@@ -32,14 +32,9 @@ struct DetailedTripView: View {
             
             Section(header: Text("Trip information")) {
                 HStack {
-                    Text("Start date")
+                    Text("Date")
                     Spacer()
-                    Text(trip.startDate.formatted(date: .numeric, time: .shortened))
-                }
-                HStack {
-                    Text("End date")
-                    Spacer()
-                    Text(trip.endDate.formatted(date: .numeric, time: .shortened))
+                    Text(trip.date.formatted(date: .numeric, time: .omitted))
                 }
                 HStack {
                     Text("Total distance")
@@ -68,7 +63,7 @@ struct DetailedTripView: View {
 
 struct DetailedTripView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedTripView(trip: Trip(id: UUID(), startDate: .now-1234567, endDate: .now, missions: [], comment: nil, totalDistance: 0.0, startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")))
+        DetailedTripView(trip: Trip(id: UUID(), date: .now, missions: [], comment: nil, totalDistance: 0.0, startingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), endingAddress: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")))
             .environmentObject(TripController())
     }
 }
