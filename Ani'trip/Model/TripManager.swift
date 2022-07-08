@@ -64,9 +64,27 @@ final class TripManager {
     }
     
     /// Downloading home informations
-    func downloadHomeInformations() {
-        // TODO: Perform API call
-        sendNotification(.successDownloadedHomeInformations)
+    func downloadHomeInformations(for user: User) {
+        if let userId = user.id {
+            networkManager.request(urlParams: ["trip", "latest", "\(userId)"], method: .get, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+                if let self = self,
+                   let response = response,
+                   let statusCode = response.statusCode {
+                    switch statusCode {
+                    case 200:
+                        self.successGettingThreeLatestTrips(with: data)
+                    case 404:
+                        self.sendErrorNotification(with: "No list found!", for: .errorGettingTripList)
+                    default:
+                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
+                    }
+                } else {
+                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
+                }
+            }
+        } else {
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
+        }
     }
     
     // MARK: Private
@@ -96,7 +114,22 @@ final class TripManager {
                 for trip in trips {
                     tripList.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
                 }
-                sendNotification(.successGettingTripList)
+            sendNotification(.successGettingTripList)
+        } else {
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
+        }
+    }
+    
+    /// Decode data when success downloading three latest trips
+    private func successGettingThreeLatestTrips(with data: Data?) {
+        if let data = data,
+           let trips = try? JSONDecoder().decode([TripInformation].self, from: data) {
+                threeLatestTrips = []
+                
+                for trip in trips {
+                    threeLatestTrips.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
+                }
+            sendNotification(.successDownloadedHomeInformations)
         } else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
         }

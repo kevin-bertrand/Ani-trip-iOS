@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var tripController: TripController
+    @EnvironmentObject var userController: UserController
+    
     let data: [TripChartPoint] = [TripChartPoint(date: "01/01", value: 10.0), TripChartPoint(date: "02/01", value: 50.2), TripChartPoint(date: "03/01", value: 0.0), TripChartPoint(date: "04/01", value: 102.0)]
     
     var body: some View {
@@ -55,7 +57,9 @@ struct HomeView: View {
         }
         .navigationTitle("🏠 Home")
         .onAppear {
-            
+            if let user = userController.connectedUser {
+                tripController.homeAppears(for: user)
+            }
         }
     }
 }
@@ -65,6 +69,7 @@ struct HomeView_Previews: PreviewProvider {
         NavigationView {
             HomeView()
                 .environmentObject(TripController())
+                .environmentObject(UserController())
         }
     }
 }

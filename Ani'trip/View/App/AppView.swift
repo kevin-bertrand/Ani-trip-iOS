@@ -10,10 +10,12 @@ import SwiftUI
 struct AppView: View {
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
+            NavigationView {
+                HomeView()
+            }
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
             
             NavigationView {
                 TripView()
@@ -24,7 +26,8 @@ struct AppView: View {
             
             NavigationView {
                 VolunteersView()
-            }.tabItem {
+            }
+            .tabItem {
                 Label("Volunteers", systemImage: "person.3.fill")
             }
             

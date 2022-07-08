@@ -61,8 +61,8 @@ final class TripController: ObservableObject {
     }
     
     /// Getting informations at home on appear
-    func homeAppears() {
-        
+    func homeAppears(for user: User) {
+        tripManager.downloadHomeInformations(for: user)
     }
     
     // MARK: Init
