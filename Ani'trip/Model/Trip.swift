@@ -45,8 +45,18 @@ struct NewTrip: Codable {
     var endingAddress: Address
 }
 
+struct DownloadedTripChatPoint: Codable {
+    let date: String
+    let distance: Double
+}
+
 struct TripChartPoint: Identifiable {
     let id = UUID()
     let date: String
-    let value: Double
+    let distance: Double
+}
+
+struct ThisWeekInformations: Codable {
+    let distance: Double
+    let numberOfTrip: Int
 }

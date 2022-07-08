@@ -29,6 +29,7 @@ final class TripController: ObservableObject {
     var numberOfTripThisWeek: Int = 0
     var distanceThisWeek: Double = 0.0
     @Published var threeLatestTrips: [Trip] = []
+    var chartPoints: [TripChartPoint] = []
     
     // MARK: Methods
     /// Downloading trip list
@@ -128,5 +129,6 @@ final class TripController: ObservableObject {
         numberOfTripThisWeek = tripManager.numberOfTripThisWeek
         distanceThisWeek = tripManager.distanceThisWeek
         threeLatestTrips = tripManager.threeLatestTrips
+        chartPoints = tripManager.chartTrips
     }
 }

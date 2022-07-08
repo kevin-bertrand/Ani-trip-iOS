@@ -14,6 +14,7 @@ final class TripManager {
     var numberOfTripThisWeek: Int = 0
     var distanceThisWeek: Double = 0.0
     var threeLatestTrips: [Trip] = []
+    var chartTrips: [TripChartPoint] { chartTripsPoints.sorted { $0.date < $1.date } }
     
     // MARK: Methods
     /// Getting trip list
@@ -72,7 +73,7 @@ final class TripManager {
                    let statusCode = response.statusCode {
                     switch statusCode {
                     case 200:
-                        self.successGettingThreeLatestTrips(with: data)
+                        self.successGettingThreeLatestTrips(with: data, for: userId, withToken: user.token)
                     case 404:
                         self.sendErrorNotification(with: "No list found!", for: .errorGettingTripList)
                     default:
@@ -90,6 +91,7 @@ final class TripManager {
     // MARK: Private
     // MARK: Properties
     private var tripList: [Trip] = []
+    private var chartTripsPoints: [TripChartPoint] = []
     private let networkManager = NetworkManager()
     
     // MARK: Methods
@@ -109,11 +111,11 @@ final class TripManager {
     private func successGettingTripList(with data: Data?) {
         if let data = data,
            let trips = try? JSONDecoder().decode([TripInformation].self, from: data) {
-                tripList = []
-                
-                for trip in trips {
-                    tripList.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
-                }
+            tripList = []
+            
+            for trip in trips {
+                tripList.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
+            }
             sendNotification(.successGettingTripList)
         } else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
@@ -121,17 +123,64 @@ final class TripManager {
     }
     
     /// Decode data when success downloading three latest trips
-    private func successGettingThreeLatestTrips(with data: Data?) {
+    private func successGettingThreeLatestTrips(with data: Data?, for userId: UUID, withToken token: String) {
         if let data = data,
            let trips = try? JSONDecoder().decode([TripInformation].self, from: data) {
-                threeLatestTrips = []
-                
-                for trip in trips {
-                    threeLatestTrips.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
+            threeLatestTrips = []
+            
+            for trip in trips {
+                threeLatestTrips.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
+            }
+            
+            networkManager.request(urlParams: ["trip", "chart", "\(userId)"], method: .get, authorization: .authorization(bearerToken: token), body: nil) { [weak self] data, response, error in
+                if let self = self,
+                   let response = response,
+                   let statusCode = response.statusCode {
+                    switch statusCode {
+                    case 200:
+                        if let data = data,
+                           let chartPoints = try? JSONDecoder().decode([DownloadedTripChatPoint].self, from: data) {
+                            for chartPoint in chartPoints {
+                                self.chartTripsPoints.append(TripChartPoint(date: chartPoint.date, distance: chartPoint.distance))
+                            }
+                            
+                            self.networkManager.request(urlParams: ["trip", "thisWeek", "\(userId)"], method: .get, authorization: .authorization(bearerToken: token), body: nil) { [weak self] data, response, error in
+                                if let self = self,
+                                   let response = response,
+                                   let statusCode = response.statusCode {
+                                    switch statusCode {
+                                    case 200:
+                                        if let data = data,
+                                           let thisWeek = try? JSONDecoder().decode(ThisWeekInformations.self, from: data) {
+                                            self.distanceThisWeek = thisWeek.distance
+                                            self.numberOfTripThisWeek = thisWeek.numberOfTrip
+                                            self.sendNotification(.successDownloadedHomeInformations)
+                                        } else {
+                                            self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
+                                        }
+                                    case 404:
+                                        self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
+                                    default:
+                                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                                    }
+                                } else {
+                                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                                }
+                            }
+                        } else {
+                            self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                        }
+                    case 404:
+                        self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
+                    default:
+                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                    }
+                } else {
+                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
                 }
-            sendNotification(.successDownloadedHomeInformations)
+            }
         } else {
-            sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingTripList)
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
         }
     }
     

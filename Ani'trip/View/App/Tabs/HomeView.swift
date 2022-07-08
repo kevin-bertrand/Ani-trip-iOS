@@ -11,9 +11,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var userController: UserController
-    
-    let data: [TripChartPoint] = [TripChartPoint(date: "01/01", value: 10.0), TripChartPoint(date: "02/01", value: 50.2), TripChartPoint(date: "03/01", value: 0.0), TripChartPoint(date: "04/01", value: 102.0)]
-    
+        
     var body: some View {
         List {
             Section {
@@ -31,9 +29,9 @@ struct HomeView: View {
                         Text("Total distance")
                         Spacer()
                     }
-                    Chart(data) {
-                        LineMark(x: .value("Date", $0.date), y: .value("Distance", $0.value))
-                        PointMark(x: .value("Date", $0.date), y: .value("Distance", $0.value))
+                    Chart(tripController.chartPoints) {
+                        LineMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
+                        PointMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
                     }
                     .frame(height: 300)
                     .padding(.vertical)
