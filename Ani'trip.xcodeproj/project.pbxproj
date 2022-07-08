@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		065E46F72877158900D32E05 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46F62877158900D32E05 /* NetworkManager.swift */; };
 		065E46FA287721F500D32E05 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 065E46F9287721F500D32E05 /* Alamofire */; };
+		065E46FC2878786F00D32E05 /* AddressToUpdateTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46FB2878786F00D32E05 /* AddressToUpdateTileView.swift */; };
+		065E46FE287879C900D32E05 /* MissionsUpdateTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46FD287879C900D32E05 /* MissionsUpdateTileView.swift */; };
+		065E470028787C1900D32E05 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46FF28787C1900D32E05 /* Double.swift */; };
 		0664F3AE2874303200F7EA1B /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AD2874303200F7EA1B /* MapController.swift */; };
 		0664F3B0287436C200F7EA1B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AF287436C200F7EA1B /* Places.swift */; };
 		0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */; };
@@ -68,6 +71,9 @@
 
 /* Begin PBXFileReference section */
 		065E46F62877158900D32E05 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		065E46FB2878786F00D32E05 /* AddressToUpdateTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressToUpdateTileView.swift; sourceTree = "<group>"; };
+		065E46FD287879C900D32E05 /* MissionsUpdateTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsUpdateTileView.swift; sourceTree = "<group>"; };
+		065E46FF28787C1900D32E05 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		0664F3AD2874303200F7EA1B /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		0664F3AF287436C200F7EA1B /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserProfilView.swift; sourceTree = "<group>"; };
@@ -268,6 +274,8 @@
 				06BDA70128734162003CFF2F /* LoadingVIew.swift */,
 				0664F3C1287594EE00F7EA1B /* ProfilView.swift */,
 				0664F3CC2875C1F000F7EA1B /* AddressTileView.swift */,
+				065E46FB2878786F00D32E05 /* AddressToUpdateTileView.swift */,
+				065E46FD287879C900D32E05 /* MissionsUpdateTileView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				06BDA6FD2873329D003CFF2F /* Notification.swift */,
+				065E46FF28787C1900D32E05 /* Double.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065E470028787C1900D32E05 /* Double.swift in Sources */,
 				06BDA6FB28732F2F003CFF2F /* UserManager.swift in Sources */,
 				06BDA6F02873068F003CFF2F /* Trip.swift in Sources */,
 				06BDA70528736A5E003CFF2F /* NewAccountView.swift in Sources */,
@@ -469,6 +479,7 @@
 				06F1737E2876C44500F4A8C1 /* TripTileView.swift in Sources */,
 				06BDA6EC28730555003CFF2F /* User.swift in Sources */,
 				0664F3C62875A85400F7EA1B /* TripManager.swift in Sources */,
+				065E46FE287879C900D32E05 /* MissionsUpdateTileView.swift in Sources */,
 				0664F3AE2874303200F7EA1B /* MapController.swift in Sources */,
 				0664F3B42874482200F7EA1B /* EditUserInfoTileView.swift in Sources */,
 				06BDA709287417C0003CFF2F /* AppView.swift in Sources */,
@@ -488,6 +499,7 @@
 				0664F3CB2875B76300F7EA1B /* DetailedTripView.swift in Sources */,
 				06BDA70028733DDB003CFF2F /* SpinnerView.swift in Sources */,
 				0664F3CF2875C64600F7EA1B /* AddTripView.swift in Sources */,
+				065E46FC2878786F00D32E05 /* AddressToUpdateTileView.swift in Sources */,
 				0664F3C42875A82D00F7EA1B /* TripController.swift in Sources */,
 				06BDA6BE287304A3003CFF2F /* Ani_tripApp.swift in Sources */,
 				0664F3CD2875C1F000F7EA1B /* AddressTileView.swift in Sources */,

@@ -10,7 +10,7 @@ import SwiftUI
 struct UpdateUserProfilView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userController: UserController
-    @State private var numberOfMissions: [Int] = []
+    
     
     var body: some View {
         Form {
@@ -21,19 +21,7 @@ struct UpdateUserProfilView: View {
             
             Group {
                 Section(header: Text("Address")) {
-                    HStack {
-                        TextField("Number", text: $userController.userToUpdate.address.streetNumber)
-                        TextField("Type", text: $userController.userToUpdate.address.roadType)
-                    }
-                    TextField("Street name", text: $userController.userToUpdate.address.roadName)
-                        .textInputAutocapitalization(.words)
-                    TextField("Complement", text: $userController.userToUpdate.address.complement)
-                    HStack {
-                        TextField("Zip code", text: $userController.userToUpdate.address.zipCode)
-                            .frame(width: 75)
-                        TextField("City", text: $userController.userToUpdate.address.city)
-                    }
-                    TextField("Country", text: $userController.userToUpdate.address.country)
+                    AddressToUpdateTileView(address: $userController.userToUpdate.address, tileTitle: nil)
                 }
                 
                 Section(header: Text("Contact")) {
@@ -66,28 +54,7 @@ struct UpdateUserProfilView: View {
                 }
             }
             
-            Section(header: Text("Missions")) {
-                HStack {
-                    Text("Adding a mission")
-                        .onTapGesture {
-                            self.userController.userToUpdate.missions.append("")
-                            self.numberOfMissions.append(numberOfMissions.count)
-                        }
-                        .foregroundColor(.accentColor)
-                        .bold()
-                }
-                List {
-                    ForEach(numberOfMissions, id:\.self) { index in
-                         TextField("Missions", text: Binding(
-                           get: { return userController.userToUpdate.missions[index] },
-                           set: { (newValue) in return self.userController.userToUpdate.missions[index] = newValue}
-                         ))
-                    }.onDelete { index in
-                        self.userController.userToUpdate.missions.remove(atOffsets: index)
-                        self.numberOfMissions = self.numberOfMissions.dropLast(1)
-                    }
-                }
-            }
+            MissionsUpdateTileView(missions: $userController.userToUpdate.missions)
             
             Section(header: Text("Security")) {
                 EditUserInfoTileView(text: $userController.updatePassword, name: "Password")
@@ -106,11 +73,6 @@ struct UpdateUserProfilView: View {
             Alert(title: Text("Success"), message: Text(Notification.AniTrip.successUserUpdate.notificationMessage), dismissButton: .default(Text("OK"), action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
-        }
-        .onAppear {
-            for index in 0..<userController.userToUpdate.missions.count {
-                numberOfMissions.append(index)
-            }
         }
     }
 }

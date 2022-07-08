@@ -132,55 +132,67 @@ final class TripManager {
                 threeLatestTrips.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
             }
             
-            networkManager.request(urlParams: ["trip", "chart", "\(userId)"], method: .get, authorization: .authorization(bearerToken: token), body: nil) { [weak self] data, response, error in
-                if let self = self,
-                   let response = response,
-                   let statusCode = response.statusCode {
-                    switch statusCode {
-                    case 200:
-                        if let data = data,
-                           let chartPoints = try? JSONDecoder().decode([DownloadedTripChatPoint].self, from: data) {
-                            for chartPoint in chartPoints {
-                                self.chartTripsPoints.append(TripChartPoint(date: chartPoint.date, distance: chartPoint.distance))
-                            }
-                            
-                            self.networkManager.request(urlParams: ["trip", "thisWeek", "\(userId)"], method: .get, authorization: .authorization(bearerToken: token), body: nil) { [weak self] data, response, error in
-                                if let self = self,
-                                   let response = response,
-                                   let statusCode = response.statusCode {
-                                    switch statusCode {
-                                    case 200:
-                                        if let data = data,
-                                           let thisWeek = try? JSONDecoder().decode(ThisWeekInformations.self, from: data) {
-                                            self.distanceThisWeek = thisWeek.distance
-                                            self.numberOfTripThisWeek = thisWeek.numberOfTrip
-                                            self.sendNotification(.successDownloadedHomeInformations)
-                                        } else {
-                                            self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
-                                        }
-                                    case 404:
-                                        self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
-                                    default:
-                                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
-                                    }
-                                } else {
-                                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
-                                }
-                            }
-                        } else {
-                            self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
-                        }
-                    case 404:
-                        self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
-                    default:
-                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
-                    }
-                } else {
-                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
-                }
-            }
+            downloadChartPoint(for: userId, with: token)
         } else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+        }
+    }
+    
+    /// Download chart point
+    private func downloadChartPoint(for userId: UUID, with token: String) {
+        networkManager.request(urlParams: ["trip", "chart", "\(userId)"], method: .get, authorization: .authorization(bearerToken: token), body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 200:
+                    if let data = data,
+                       let chartPoints = try? JSONDecoder().decode([DownloadedTripChatPoint].self, from: data) {
+                        self.chartTripsPoints = []
+                        
+                        for chartPoint in chartPoints {
+                            self.chartTripsPoints.append(TripChartPoint(date: chartPoint.date, distance: chartPoint.distance))
+                        }
+                        
+                        self.downloadThisWeekInformations(for: userId, with: token)
+                    } else {
+                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                    }
+                case 404:
+                    self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+            }
+        }
+    }
+    
+    /// Download this week informations
+    private func downloadThisWeekInformations(for userId: UUID, with token: String) {
+        networkManager.request(urlParams: ["trip", "thisWeek", "\(userId)"], method: .get, authorization: .authorization(bearerToken: token), body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 200:
+                    if let data = data,
+                       let thisWeek = try? JSONDecoder().decode(ThisWeekInformations.self, from: data) {
+                        self.distanceThisWeek = thisWeek.distance
+                        self.numberOfTripThisWeek = thisWeek.numberOfTrip
+                        self.sendNotification(.successDownloadedHomeInformations)
+                    } else {
+                        self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
+                    }
+                case 404:
+                    self.sendErrorNotification(with: "No list found!", for: .errorDownloadedHomeInformations)
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
+            }
         }
     }
     

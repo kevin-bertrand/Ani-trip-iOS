@@ -39,7 +39,7 @@ struct DetailedTripView: View {
                 HStack {
                     Text("Total distance")
                     Spacer()
-                    Text("\(trip.totalDistance) km")
+                    Text("\(trip.totalDistance.twoDigitPrecision) km")
                 }
             }
             

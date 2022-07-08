@@ -18,7 +18,7 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(spacing: 15) {
                         NewsTileView(title: "This week:", icon: Image(systemName: "car"), information: "\(tripController.numberOfTripThisWeek) trips")
-                        NewsTileView(title: "This week:", icon: Image("TripIcon"), information: "\(tripController.distanceThisWeek) km")
+                        NewsTileView(title: "This week:", icon: Image("TripIcon"), information: "\(tripController.distanceThisWeek.twoDigitPrecision) km")
                     }.padding()
                 }
             }

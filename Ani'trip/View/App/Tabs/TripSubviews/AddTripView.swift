@@ -16,47 +16,15 @@ struct AddTripView: View {
     var body: some View {
         Form {
             Section {
-                VStack(alignment: .leading) {
-                    Text("Starting address")
-                        .font(.callout)
-                        .foregroundColor(.gray)
-                    HStack {
-                        TextField("Number", text: $tripController.newTrip.startingAddress.streetNumber)
-                        TextField("Type", text: $tripController.newTrip.startingAddress.roadType)
-                    }
-                    TextField("Street name", text: $tripController.newTrip.startingAddress.roadName)
-                    TextField("Complement", text: $tripController.newTrip.startingAddress.complement)
-                    HStack {
-                        TextField("Zip code", text: $tripController.newTrip.startingAddress.zipCode)
-                            .frame(width: 75)
-                        TextField("City", text: $tripController.newTrip.startingAddress.city)
-                    }
-                    TextField("Country", text: $tripController.newTrip.startingAddress.country)
-                }
+                AddressToUpdateTileView(address: $tripController.newTrip.startingAddress, tileTitle: "Starting address")
             }
             
             Section {
-                VStack(alignment: .leading) {
-                    Text("Ending address")
-                        .font(.callout)
-                        .foregroundColor(.gray)
-                    HStack {
-                        TextField("Number", text: $tripController.newTrip.endingAddress.streetNumber)
-                        TextField("Type", text: $tripController.newTrip.endingAddress.roadType)
-                    }
-                    TextField("Street name", text: $tripController.newTrip.endingAddress.roadName)
-                    TextField("Complement", text: $tripController.newTrip.endingAddress.complement)
-                    HStack {
-                        TextField("Zip code", text: $tripController.newTrip.endingAddress.zipCode)
-                            .frame(width: 75)
-                        TextField("City", text: $tripController.newTrip.endingAddress.city)
-                    }
-                    TextField("Country", text: $tripController.newTrip.endingAddress.country)
-                }
+                AddressToUpdateTileView(address: $tripController.newTrip.endingAddress, tileTitle: "Ending address")
             }
             
             Section(header: Text("Trip information")) {
-                DatePicker("Date", selection: $tripController.newTrip.date)
+                DatePicker("Date", selection: $tripController.newTrip.date, displayedComponents: .date)
                 Toggle("Auto distance calculation", isOn: .constant(false))
                     .disabled(true)
                 HStack {
@@ -68,28 +36,7 @@ struct AddTripView: View {
                 }
             }
             
-            Section(header: Text("Missions")) {
-                HStack {
-                    Text("Adding a mission")
-                        .onTapGesture {
-                            self.tripController.newTrip.missions.append("")
-                            self.numberOfMissions.append(numberOfMissions.count)
-                        }
-                        .foregroundColor(.accentColor)
-                        .bold()
-                }
-                List {
-                    ForEach(numberOfMissions, id:\.self) { index in
-                         TextField("Missions", text: Binding(
-                           get: { return tripController.newTrip.missions[index] },
-                           set: { (newValue) in return self.tripController.newTrip.missions[index] = newValue}
-                         ))
-                    }.onDelete { index in
-                        self.tripController.newTrip.missions.remove(atOffsets: index)
-                        self.numberOfMissions = self.numberOfMissions.dropLast(1)
-                    }
-                }
-            }
+            MissionsUpdateTileView(missions: $tripController.newTrip.missions)
             
             Section(header: Text("Comments")) {
                 TextEditor(text: $tripController.newTrip.comment)
@@ -99,7 +46,6 @@ struct AddTripView: View {
             if let connectedUser = userController.connectedUser {
                 Button {
                     tripController.addNewTrip(for: connectedUser)
-                    
                 } label: {
                     Image(systemName: "v.circle")
                 }

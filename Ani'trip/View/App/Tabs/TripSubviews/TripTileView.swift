@@ -20,7 +20,7 @@ struct TripTileView: View {
                     .bold()
                     .font(.title2)
                 Text(trip.date.formatted(date: .numeric, time: .omitted))
-                Text("\(trip.totalDistance) km")
+                Text("\(trip.totalDistance.twoDigitPrecision) km")
             }
         }
     }
