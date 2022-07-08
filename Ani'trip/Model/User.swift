@@ -17,6 +17,7 @@ struct ConnectedUser: Codable {
     let position: String
     let missions: [String]
     let token: String
+    let address: Address?
 }
 
 struct User: Codable {
@@ -43,7 +44,7 @@ struct UpdateUser: Codable {
     var position: Position
     var missions: [String]
     var isActive: Bool
-//    var address: Address
+    var address: Address
     var password: String
     var passwordVerification: String
 }
@@ -51,6 +52,12 @@ struct UpdateUser: Codable {
 struct UserToConnect {
     var email: String
     var password: String
+}
+
+struct UserToCreate: Codable {
+    var email: String
+    var password: String
+    var passwordVerification: String
 }
 
 enum Gender: String, Codable {

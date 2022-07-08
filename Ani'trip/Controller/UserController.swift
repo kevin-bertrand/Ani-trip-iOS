@@ -37,7 +37,7 @@ final class UserController: ObservableObject {
     
     // Update user informations
     @Published var showUpdateUserAlert: Bool = false
-    @Published var userToUpdate: User = User(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""), token: "")
+    @Published var userToUpdate: User
     @Published var updatePassword: String = ""
     @Published var updatePasswordVerification: String = ""
     var updatePasswordError: String = ""
@@ -89,7 +89,7 @@ final class UserController: ObservableObject {
             return
         }
         
-        userManager.createAccount(for: UserToConnect(email: newEmail, password: newPassword))
+        userManager.createAccount(for: UserToCreate(email: newEmail, password: newPassword, passwordVerification: newPasswordVerification))
     }
     
     /// End the request of the creation of a new account
@@ -149,13 +149,15 @@ final class UserController: ObservableObject {
                                             position: userToUpdate.position,
                                             missions: userToUpdate.missions,
                                             isActive: userToUpdate.isActive,
-//                                            address: userToUpdate.address,
+                                            address: userToUpdate.address,
                                             password: updatePassword,
                                             passwordVerification: updatePasswordVerification))
     }
     
     // MARK: Init
     init() {
+        userToUpdate = User(id: UUID(), firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: false, address: mapController.emptyAddress, token: "")
+        
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
         configureNotification(for: Notification.AniTrip.loginFailled.notificationName)
         configureNotification(for: Notification.AniTrip.successfullCreation.notificationName)
@@ -182,29 +184,28 @@ final class UserController: ObservableObject {
     /// Initialise all notification for this controller
     @objc private func processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name {
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-                self.showLoadingInProgressView = false
-                
-                switch notificationName {
-                case Notification.AniTrip.loginFailled.notificationName:
-                    self.errorMessage = self.userManager.errorMessage
-                case Notification.AniTrip.loginSuccess.notificationName:
-                    self.loginSuccess()
-                case Notification.AniTrip.successfullCreation.notificationName:
-                    self.showNewAccountAlert = true
-                case Notification.AniTrip.errorDuringCreation.notificationName:
-                    self.errorMessage = Notification.AniTrip.errorDuringCreation.notificationMessage
-                case Notification.AniTrip.successRequestForNewPassword.notificationName:
-                    self.showForgetPasswordAlert = true
-                case Notification.AniTrip.errorDuringRequestForNewPassword.notificationName:
-                    self.errorMessage = Notification.AniTrip.errorDuringRequestForNewPassword.notificationMessage
-                case Notification.AniTrip.successUserUpdate.notificationName:
-                    self.showUpdateUserAlert = true
-                case Notification.AniTrip.errorDuringUpdatingUser.notificationName:
-                    print("ok")
-                default: break
-                }
+            showLoadingInProgressView = false
+            objectWillChange.send()
+            
+            switch notificationName {
+            case Notification.AniTrip.loginFailled.notificationName:
+                errorMessage = self.userManager.errorMessage
+            case Notification.AniTrip.loginSuccess.notificationName:
+                loginSuccess()
+            case Notification.AniTrip.successfullCreation.notificationName:
+                showNewAccountAlert = true
+            case Notification.AniTrip.errorDuringCreation.notificationName:
+                errorMessage = Notification.AniTrip.errorDuringCreation.notificationMessage
+            case Notification.AniTrip.successRequestForNewPassword.notificationName:
+                showForgetPasswordAlert = true
+            case Notification.AniTrip.errorDuringRequestForNewPassword.notificationName:
+                errorMessage = Notification.AniTrip.errorDuringRequestForNewPassword.notificationMessage
+            case Notification.AniTrip.successUserUpdate.notificationName:
+                showUpdateUserAlert = true
+            case Notification.AniTrip.errorDuringUpdatingUser.notificationName:
+                errorMessage = self.userManager.errorMessage
+                showUpdateUserAlert = true
+            default: break
             }
         }
     }

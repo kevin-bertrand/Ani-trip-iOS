@@ -222,10 +222,10 @@
 		06BDA6E7287304AF003CFF2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				06BDA6EB28730555003CFF2F /* User.swift */,
 				06BDA6ED287305DE003CFF2F /* Address.swift */,
 				06BDA6EF2873068F003CFF2F /* Trip.swift */,
 				0664F3C52875A85400F7EA1B /* TripManager.swift */,
+				06BDA6EB28730555003CFF2F /* User.swift */,
 				06BDA6FA28732F2F003CFF2F /* UserManager.swift */,
 				0664F3AF287436C200F7EA1B /* Places.swift */,
 				0664F3B7287586B000F7EA1B /* Volunteer.swift */,

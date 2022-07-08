@@ -24,22 +24,38 @@ final class UserManager {
                 case 200:
                     self.successLogin(with: data)
                 case 401:
-                    self.sendErrorNotification(with: "Wrong credentials!")
+                    self.sendErrorNotification(with: "Wrong credentials!", for: .loginFailled)
                 case 460:
-                    self.sendErrorNotification(with: "Your account is not active yet!")
+                    self.sendErrorNotification(with: "Your account is not active yet!", for: .loginFailled)
                 default:
-                    self.sendErrorNotification(with: "Unknown error! Try later!")
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .loginFailled)
                 }
             } else {
-                self?.sendErrorNotification(with: "Unknown error! Try later!")
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .loginFailled)
             }
         }
     }
     
     /// Perform the creation of the new account
-    func createAccount(for user: UserToConnect) {
-        // TODO: Process creation
-        sendNotification(.successfullCreation)
+    func createAccount(for user: UserToCreate) {
+        networkManager.request(urlParams: ["user", "create"], method: .post, authorization: nil, body: user) { [weak self] data, response, error in
+            if let self = self,
+               let response = response,
+               let statusCode = response.statusCode {
+                switch statusCode {
+                case 201:
+                    self.sendNotification(.successfullCreation)
+                case 406:
+                    self.sendErrorNotification(with: "Your passwords don't match!", for: .errorDuringCreation)
+                case 500:
+                    self.sendErrorNotification(with: "Your account cannot be created! Verify your informations!", for: .errorDuringCreation)
+                default:
+                    self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringCreation)
+                }
+            } else {
+                self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringCreation)
+            }
+        }
     }
     
     /// Perform the asking of a new password
@@ -61,21 +77,23 @@ final class UserManager {
                    let response = response,
                    let statusCode = response.statusCode {
                     switch statusCode {
-                    case 200:
-                        self.sendNotification(.successUserUpdate)
+                    case 202:
+                        self.successUpdate(with: data)
                     case 401:
-                        self.sendErrorNotification(with: "Your are not authorised to perform this operation!")
+                        self.sendErrorNotification(with: "Your are not authorised to perform this operation!", for: .errorDuringUpdatingUser)
                     case 406:
-                        self.sendErrorNotification(with: "Your user account was not found!")
+                        self.sendErrorNotification(with: "Your user account was not found!", for: .errorDuringUpdatingUser)
                     case 460:
-                        self.sendErrorNotification(with: "Your account is not active yet!")
+                        self.sendErrorNotification(with: "Your account is not active yet!", for: .errorDuringUpdatingUser)
                     default:
-                        self.sendErrorNotification(with: "Unknown error! Try later!")
+                        self.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
                     }
                 } else {
-                    self?.sendErrorNotification(with: "Unknown error! Try later!")
+                    self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
                 }
             }
+        } else {
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
         }
     }
     
@@ -123,17 +141,42 @@ final class UserManager {
                                 position: position,
                                 missions: user.missions,
                                 isActive: true,
-                                address: self.mapController.emptyAddress,
+                                address: user.address ?? self.mapController.emptyAddress,
                                 token: user.token)
             sendNotification(.loginSuccess)
         } else {
-            sendErrorNotification(with: "Unknown error! Try later!")
+            sendErrorNotification(with: "Unknown error! Try later!", for: .loginFailled)
+        }
+    }
+    
+    /// Decode data when success update
+    private func successUpdate(with data: Data?) {
+        if let data = data,
+           let user = try? JSONDecoder().decode(ConnectedUser.self, from: data),
+           let userId = UUID(uuidString: user.id),
+           let gender = Gender(rawValue: user.gender),
+           let position = Position(rawValue: user.position) {
+            errorMessage = ""
+            connecteUser = User(id: userId,
+                                firstname: user.firstname,
+                                lastname: user.lastname,
+                                email: user.email,
+                                phoneNumber: user.phoneNumber,
+                                gender: gender,
+                                position: position,
+                                missions: user.missions,
+                                isActive: true,
+                                address: user.address ?? self.mapController.emptyAddress,
+                                token: user.token)
+            sendNotification(.successUserUpdate)
+        } else {
+            sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
         }
     }
     
     /// Configure and send error notification
-    private func sendErrorNotification(with error: String) {
+    private func sendErrorNotification(with error: String, for notification: Notification.AniTrip) {
         errorMessage = error
-        sendNotification(.loginFailled)
+        sendNotification(notification)
     }
 }
