@@ -10,6 +10,7 @@ import SwiftUI
 struct UpdateUserProfilView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userController: UserController
+    @State private var numberOfMissions: [Int] = []
     
     var body: some View {
         Form {
@@ -63,11 +64,28 @@ struct UpdateUserProfilView: View {
                             .foregroundColor(.gray)
                     }
                 }
-                
+            }
+            
+            Section(header: Text("Missions")) {
                 HStack {
-                    Text("Missions")
-                    Spacer()
-                    Text("\(userController.userToUpdate.missions.joined(separator: ", "))")
+                    Text("Adding a mission")
+                        .onTapGesture {
+                            self.userController.userToUpdate.missions.append("")
+                            self.numberOfMissions.append(numberOfMissions.count)
+                        }
+                        .foregroundColor(.accentColor)
+                        .bold()
+                }
+                List {
+                    ForEach(numberOfMissions, id:\.self) { index in
+                         TextField("Missions", text: Binding(
+                           get: { return userController.userToUpdate.missions[index] },
+                           set: { (newValue) in return self.userController.userToUpdate.missions[index] = newValue}
+                         ))
+                    }.onDelete { index in
+                        self.userController.userToUpdate.missions.remove(atOffsets: index)
+                        self.numberOfMissions = self.numberOfMissions.dropLast(1)
+                    }
                 }
             }
             
@@ -89,7 +107,11 @@ struct UpdateUserProfilView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }))
         }
-        
+        .onAppear {
+            for index in 0..<userController.userToUpdate.missions.count {
+                numberOfMissions.append(index)
+            }
+        }
     }
 }
 

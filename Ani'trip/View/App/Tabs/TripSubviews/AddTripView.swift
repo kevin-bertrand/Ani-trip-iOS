@@ -11,6 +11,7 @@ struct AddTripView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var userController: UserController
+    @State private var numberOfMissions: [Int] = []
     
     var body: some View {
         Form {
@@ -68,10 +69,29 @@ struct AddTripView: View {
             }
             
             Section(header: Text("Missions")) {
-                Text(tripController.newTrip.missions.joined(separator: ", "))
+                HStack {
+                    Text("Adding a mission")
+                        .onTapGesture {
+                            self.tripController.newTrip.missions.append("")
+                            self.numberOfMissions.append(numberOfMissions.count)
+                        }
+                        .foregroundColor(.accentColor)
+                        .bold()
+                }
+                List {
+                    ForEach(numberOfMissions, id:\.self) { index in
+                         TextField("Missions", text: Binding(
+                           get: { return tripController.newTrip.missions[index] },
+                           set: { (newValue) in return self.tripController.newTrip.missions[index] = newValue}
+                         ))
+                    }.onDelete { index in
+                        self.tripController.newTrip.missions.remove(atOffsets: index)
+                        self.numberOfMissions = self.numberOfMissions.dropLast(1)
+                    }
+                }
             }
             
-            Section(header: Text("Header")) {
+            Section(header: Text("Comments")) {
                 TextEditor(text: $tripController.newTrip.comment)
             }
         }
