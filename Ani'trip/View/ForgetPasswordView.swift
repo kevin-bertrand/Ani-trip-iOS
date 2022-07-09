@@ -19,8 +19,8 @@ struct ForgetPasswordView: View {
             
             Spacer()
             
-            TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.forgetPasswordEmail)
-            Text(userController.errorMessage)
+            TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.forgetPasswordEmailField)
+            Text(userController.userErrorMessage)
                 .bold()
                 .foregroundColor(.red)
             Text("Enter your email and click on the button bellow. An email with a link to create a new password will be send.")

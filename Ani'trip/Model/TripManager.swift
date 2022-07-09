@@ -114,7 +114,7 @@ final class TripManager {
             tripList = []
             
             for trip in trips {
-                tripList.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
+                tripList.append(Trip(id: trip.id, date: trip.date.toDate ?? .now, missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
             }
             sendNotification(.successGettingTripList)
         } else {
@@ -129,7 +129,7 @@ final class TripManager {
             threeLatestTrips = []
             
             for trip in trips {
-                threeLatestTrips.append(Trip(id: trip.id, date: formatDateFromString(trip.date), missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
+                threeLatestTrips.append(Trip(id: trip.id, date: trip.date.toDate ?? .now, missions: trip.missions, comment: trip.comment, totalDistance: trip.totalDistance, startingAddress: trip.startingAddress, endingAddress: trip.endingAddress))
             }
             
             downloadChartPoint(for: userId, with: token)
@@ -194,16 +194,5 @@ final class TripManager {
                 self?.sendErrorNotification(with: "Unknown error! Try later!", for: .errorDownloadedHomeInformations)
             }
         }
-    }
-    
-    /// Format date
-    private func formatDateFromString(_ input: String) -> Date {
-        var date = Date.now
-        let dateFormatter = ISO8601DateFormatter()
-        if let formattedDate = dateFormatter.date(from: input) {
-            date = formattedDate
-        }
-        
-        return date
     }
 }

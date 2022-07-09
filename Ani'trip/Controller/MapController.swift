@@ -12,8 +12,8 @@ import MapKit
 final class MapController: ObservableObject {
     // MARK: Public
     // MARK: Properties
-    let emptyAddress: Address = Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")
     let defaultMapPoint: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+    let emptyAddress: Address = Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")
     
     // MARK: Methods
     func getAddressFromString(_ address: Address, completionHandler: @escaping ((CLLocationCoordinate2D?)->Void)) {
@@ -27,11 +27,4 @@ final class MapController: ObservableObject {
             }
         }
     }
-    
-    
-    // MARK: Private
-    // MARK: Properties
-    
-    // MARK: Methods
-    
 }

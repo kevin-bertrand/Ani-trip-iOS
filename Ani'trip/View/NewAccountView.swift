@@ -26,13 +26,13 @@ struct NewAccountView: View {
             Spacer()
             
             Group {
-                TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.newEmail)
+                TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.newUserEmailField)
                 
-                TextFieldWithIcon(icon: "lock", placeholder: "Password", isSecure: true, text: $userController.newPassword)
+                TextFieldWithIcon(icon: "lock", placeholder: "Password", isSecure: true, text: $userController.newUserPasswordField)
                 
-                TextFieldWithIcon(icon: "lock", placeholder: "Password verification", isSecure: true, text: $userController.newPasswordVerification)
+                TextFieldWithIcon(icon: "lock", placeholder: "Password verification", isSecure: true, text: $userController.newUserPasswordVerificationField)
                 
-                Text(userController.errorMessage)
+                Text(userController.userErrorMessage)
                     .bold()
                     .foregroundColor(.red)
             }.padding()

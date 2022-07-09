@@ -12,24 +12,28 @@ import MapKit
 final class TripController: ObservableObject {
     // MARK: Public
     // MARK: Properties
+    @Published var searchFilter: String = "" {
+        didSet {
+            filterTripList()
+        }
+    }
     @Published var trips: [Trip] = []
-    @Published var searchFilter: String = ""
     
     // Detailed trip
-    @Published var startAddress: MKCoordinateRegion
-    var startPin: [Places] = []
     @Published var endAddress: MKCoordinateRegion
+    @Published var startAddress: MKCoordinateRegion
     var endPin: [Places] = []
+    var startPin: [Places] = []
     
     // Add trip
     @Published var showSuccessAddingTripAlert: Bool = false
     @Published var newTrip: AddTrip
     
     // Home View
-    var numberOfTripThisWeek: Int = 0
-    var distanceThisWeek: Double = 0.0
     @Published var threeLatestTrips: [Trip] = []
     var chartPoints: [TripChartPoint] = []
+    var distanceThisWeek: Double = 0.0
+    var numberOfTripThisWeek: Int = 0
     
     // MARK: Methods
     /// Downloading trip list
@@ -68,11 +72,13 @@ final class TripController: ObservableObject {
     
     // MARK: Init
     init() {
+        // Properties initialization
         mapController = MapController()
-        newTrip = AddTrip(date: .now, missions: [], comment: "", totalDistance: "", startingAddress: mapController.emptyAddress, endingAddress: mapController.emptyAddress)
+        newTrip = AddTrip(date: .now, missions: [], comment: "", totalDistance: "", startingAddress: mapController.emptyAddress, endingAddress: mapController.emptyAddress)        
         startAddress = mapController.defaultMapPoint
         endAddress = mapController.defaultMapPoint
         
+        // Configure notifications
         configureNotification(for: Notification.AniTrip.successGettingTripList.notificationName)
         configureNotification(for: Notification.AniTrip.errorGettingTripList.notificationName)
         configureNotification(for: Notification.AniTrip.successAddingTrip.notificationName)
@@ -119,8 +125,8 @@ final class TripController: ObservableObject {
     
     /// Reset Map pin
     private func resetMapPin() {
-        startAddress = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
-        endAddress = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+        startAddress = mapController.defaultMapPoint
+        endAddress = mapController.defaultMapPoint
     }
     
     /// End download home information
@@ -130,5 +136,14 @@ final class TripController: ObservableObject {
         distanceThisWeek = tripManager.distanceThisWeek
         threeLatestTrips = tripManager.threeLatestTrips
         chartPoints = tripManager.chartTrips
+    }
+    
+    /// Filter trip list
+    private func filterTripList() {
+        if searchFilter.isEmpty {
+            trips = tripManager.trips
+        } else {
+            trips = tripManager.trips.filter { !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) }
+        }
     }
 }

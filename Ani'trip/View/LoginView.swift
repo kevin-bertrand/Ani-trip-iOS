@@ -19,16 +19,16 @@ struct LoginView: View {
 
             Spacer()
             
-            TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.loginEmail)
+            TextFieldWithIcon(icon: "person.fill", placeholder: "Email", keyboardType: .emailAddress, text: $userController.loginEmailField)
             
             HStack {
                 Spacer()
                 Text("Save email")
                     .foregroundColor(Color.gray)
                 Button {
-                    userController.rememberEmail.toggle()
+                    userController.rememberEmailToggle.toggle()
                 } label: {
-                    if userController.rememberEmail {
+                    if userController.rememberEmailToggle {
                         Image(systemName: "checkmark.square")
                     } else {
                         Image(systemName: "square")
@@ -36,7 +36,7 @@ struct LoginView: View {
                 }
             }.padding(.bottom)
             
-            TextFieldWithIcon(icon: "lock", placeholder: "Password", isSecure: true, text: $userController.loginPassword)
+            TextFieldWithIcon(icon: "lock", placeholder: "Password", isSecure: true, text: $userController.loginPasswordField)
             
             HStack {
                 Spacer()
@@ -47,7 +47,7 @@ struct LoginView: View {
                 }
             }.padding(.bottom)
             
-            Text(userController.errorMessage)
+            Text(userController.userErrorMessage)
                 .bold()
                 .foregroundColor(.red)
             

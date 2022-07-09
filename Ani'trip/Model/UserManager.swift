@@ -10,7 +10,7 @@ import Foundation
 final class UserManager {
     // MARK: Public
     // MARK: Properties
-    var user: User? { connecteUser }
+    var user: User? { connectedUser }
     var volunteers: [User] { volunteersList.sorted {$0.firstname.lowercased() < $1.firstname.lowercased()} }
     var errorMessage: String = ""
     
@@ -19,8 +19,7 @@ final class UserManager {
     func login(user: UserToConnect) {
         networkManager.request(urlParams: ["user", "login"], method: .post, authorization: .authorization(username: user.email, password: user.password), body: nil) { [weak self] data, response, error in
             if let self = self,
-               let response = response,
-               let statusCode = response.statusCode {
+               let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
                     self.successLogin(with: data)
@@ -41,8 +40,7 @@ final class UserManager {
     func createAccount(for user: UserToCreate) {
         networkManager.request(urlParams: ["user", "create"], method: .post, authorization: nil, body: user) { [weak self] data, response, error in
             if let self = self,
-               let response = response,
-               let statusCode = response.statusCode {
+               let statusCode = response?.statusCode {
                 switch statusCode {
                 case 201:
                     self.sendNotification(.successfullCreation)
@@ -67,20 +65,19 @@ final class UserManager {
     
     /// Disconnect the user
     func disconnect() {
-        connecteUser = nil
+        connectedUser = nil
     }
     
     /// Update the user informations
     func update(user: UpdateUser) {
-        guard let connecteUser = connecteUser else {
+        guard let connectedUser = connectedUser else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorDuringUpdatingUser)
             return
         }
         
-        networkManager.request(urlParams: ["user"], method: .patch, authorization: .authorization(bearerToken: connecteUser.token), body: user) { [weak self] data, response, error in
+        networkManager.request(urlParams: ["user"], method: .patch, authorization: .authorization(bearerToken: connectedUser.token), body: user) { [weak self] data, response, error in
             if let self = self,
-               let response = response,
-               let statusCode = response.statusCode {
+               let statusCode = response?.statusCode {
                 switch statusCode {
                 case 202:
                     self.successUpdate(with: data)
@@ -101,15 +98,14 @@ final class UserManager {
     
     /// Getting the list of all volunteers
     func getVolunteerList() {
-        guard let connecteUser = connecteUser else {
+        guard let connectedUser = connectedUser else {
             sendErrorNotification(with: "Unknown error! Try later!", for: .errorGettingVolunteerList)
             return
         }
         
-        networkManager.request(urlParams: ["user"], method: .get, authorization: .authorization(bearerToken: connecteUser.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: ["user"], method: .get, authorization: .authorization(bearerToken: connectedUser.token), body: nil) { [weak self] data, response, error in
             if let self = self,
-               let response = response,
-               let statusCode = response.statusCode {
+               let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
                     self.successGettingVolunteersList(with: data)
@@ -124,7 +120,7 @@ final class UserManager {
     
     // MARK: Private
     // MARK: Properties
-    private var connecteUser: User?
+    private var connectedUser: User?
     private var volunteersList: [User] = []
     private let networkManager = NetworkManager()
     private let mapController = MapController()
@@ -137,19 +133,6 @@ final class UserManager {
         NotificationCenter.default.post(notificationBuilder)
     }
     
-    private func getBasicAuthentication(for user: UserToConnect) -> String {
-        var authentication: String = ""
-        
-        let credentials = "\(user.email):\(user.password)"
-        let dataCredentials = credentials.data(using: .utf8)
-        
-        if let dataCredentials = dataCredentials {
-            let encodedCredentials = dataCredentials.base64EncodedString()
-            authentication = "Basic \(encodedCredentials)"
-        }
-        return authentication
-    }
-    
     /// Decode data when success login
     private func successLogin(with data: Data?) {
         if let data = data,
@@ -158,7 +141,7 @@ final class UserManager {
            let gender = Gender(rawValue: user.gender),
            let position = Position(rawValue: user.position) {
             errorMessage = ""
-            connecteUser = User(id: userId,
+            connectedUser = User(id: userId,
                                 firstname: user.firstname,
                                 lastname: user.lastname,
                                 email: user.email,
@@ -194,7 +177,7 @@ final class UserManager {
            let gender = Gender(rawValue: user.gender),
            let position = Position(rawValue: user.position) {
             errorMessage = ""
-            connecteUser = User(id: userId,
+            connectedUser = User(id: userId,
                                 firstname: user.firstname,
                                 lastname: user.lastname,
                                 email: user.email,

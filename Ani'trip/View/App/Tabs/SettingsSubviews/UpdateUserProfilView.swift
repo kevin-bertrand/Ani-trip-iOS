@@ -57,8 +57,8 @@ struct UpdateUserProfilView: View {
             MissionsUpdateTileView(missions: $userController.userToUpdate.missions)
             
             Section(header: Text("Security")) {
-                EditUserInfoTileView(text: $userController.updatePassword, name: "Password")
-                EditUserInfoTileView(text: $userController.updatePasswordVerification, name: "Password Verification")
+                EditUserInfoTileView(text: $userController.updatePasswordField, name: "Password")
+                EditUserInfoTileView(text: $userController.updatePasswordVerificationField, name: "Password Verification")
             }
         }
         .toolbar {

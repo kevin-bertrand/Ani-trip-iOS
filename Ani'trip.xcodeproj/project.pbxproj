@@ -12,6 +12,7 @@
 		065E46FC2878786F00D32E05 /* AddressToUpdateTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46FB2878786F00D32E05 /* AddressToUpdateTileView.swift */; };
 		065E46FE287879C900D32E05 /* MissionsUpdateTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46FD287879C900D32E05 /* MissionsUpdateTileView.swift */; };
 		065E470028787C1900D32E05 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E46FF28787C1900D32E05 /* Double.swift */; };
+		065E4702287A0FFE00D32E05 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4701287A0FFE00D32E05 /* String.swift */; };
 		0664F3AE2874303200F7EA1B /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AD2874303200F7EA1B /* MapController.swift */; };
 		0664F3B0287436C200F7EA1B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3AF287436C200F7EA1B /* Places.swift */; };
 		0664F3B22874464F00F7EA1B /* UpdateUserProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */; };
@@ -74,6 +75,7 @@
 		065E46FB2878786F00D32E05 /* AddressToUpdateTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressToUpdateTileView.swift; sourceTree = "<group>"; };
 		065E46FD287879C900D32E05 /* MissionsUpdateTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsUpdateTileView.swift; sourceTree = "<group>"; };
 		065E46FF28787C1900D32E05 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		065E4701287A0FFE00D32E05 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		0664F3AD2874303200F7EA1B /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		0664F3AF287436C200F7EA1B /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		0664F3B12874464F00F7EA1B /* UpdateUserProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserProfilView.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			children = (
 				06BDA6FD2873329D003CFF2F /* Notification.swift */,
 				065E46FF28787C1900D32E05 /* Double.swift */,
+				065E4701287A0FFE00D32E05 /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065E4702287A0FFE00D32E05 /* String.swift in Sources */,
 				065E470028787C1900D32E05 /* Double.swift in Sources */,
 				06BDA6FB28732F2F003CFF2F /* UserManager.swift in Sources */,
 				06BDA6F02873068F003CFF2F /* Trip.swift in Sources */,

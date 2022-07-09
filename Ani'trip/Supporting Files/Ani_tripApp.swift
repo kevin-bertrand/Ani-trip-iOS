@@ -16,7 +16,7 @@ struct Ani_tripApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if userController.isLoggedIn {
+                if userController.userIsLoggedIn {
                     AppView()
                         .environmentObject(mapController)
                         .environmentObject(tripController)

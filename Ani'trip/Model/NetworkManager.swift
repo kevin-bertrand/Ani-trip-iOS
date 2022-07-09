@@ -9,6 +9,8 @@ import Alamofire
 import Foundation
 
 final class NetworkManager: NetworkProtocol {
+    // MARK: Public
+    // MARK: Method
     /// Perform Alamofire request
     func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader?, body: Encodable?, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
         
@@ -38,6 +40,8 @@ final class NetworkManager: NetworkProtocol {
         }
     }
     
+    // MARK: Private
+    // MARK: Properties
     private let url = "http://192.168.1.164:80"
 }
 
